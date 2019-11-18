@@ -22,7 +22,7 @@ mongoose.connect(config.URI, { useNewUrlParser: true })
 app.use(cors());
 app.use(bodyParser.json());
 app.use(middleware.requestLogger);
-app.use(postRouter);
+app.use('/api',postRouter);
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 

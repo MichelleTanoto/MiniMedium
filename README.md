@@ -11,7 +11,7 @@ to run ``
 
 
 ## to-do
-1. connect to mongoose
+1. connect to mongoose 
 2. do the backend
 3. do future functionality
 4. separate components
