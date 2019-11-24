@@ -1,14 +1,14 @@
 const postRouter = require('express').Router()
 const Post = require('../models/postModel') // allow mongoose functionality
 
-postRouter.get('/posts', (request, response) => {
+postRouter.get('/', (request, response) => {
     Post.find({})
       .then(posts => {
       response.json(posts.map(post => post.toJSON()))
     })
   })
   
-  postRouter.get('/posts/:id', (request, response, next) => {
+  postRouter.get('/:id', (request, response, next) => {
     Post.findById(request.params.id)
       .then(post => {
         if (post) {
@@ -24,7 +24,9 @@ postRouter.get('/posts', (request, response) => {
     const body = request.body
   
     const post = new Post({
+      username: body.username,
       content: body.content,
+      category: tag,
       date: new Date(),
     })
   
@@ -43,17 +45,19 @@ postRouter.get('/posts', (request, response) => {
       .catch(error => next(error))
   })
   
-  postRouter.put('/posts/:id', (request, response, next) => {
+  postRouter.put('/update/:id', (request, response, next) => {
     const body = request.body
   
-    const note = {
+    const post = {
+      username: body.username,
       content: body.content,
-      important: body.important,
+      category: tag,
+      date: new Date()
     }
   
-    Post.findByIdAndUpdate(request.params.id, note, { new: true })
-      .then(updatedNote => {
-        response.json(updatedNote.toJSON())
+    Post.findByIdAndUpdate(request.params.id, post, { new: true })
+      .then(updatedPost => {
+        response.json(updatedPost.toJSON())
       })
       .catch(error => next(error))
   })
