@@ -11,7 +11,7 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3001/posts') // might change the url
+      .get('http://localhost:3001/posts')
       .then(response => {
         console.log('promise fulfilled')
         setPost(response.data)
@@ -34,10 +34,9 @@ const handlePostChange = (event) => {
     }
 
   axios
-  .post('http://localhost:3001/posts', postObject)
-  .then(response => {
+  .post('http://localhost:3001/posts/add', postObject)
+  .then(res => {
     setPost(post.concat(postObject));
-    console.log(post);
   })
   setNewPost('');
   }
@@ -63,7 +62,7 @@ const handlePostChange = (event) => {
     setPost(afterDeletion);
 
     axios
-    .delete('http://localhost:3001/posts', {params: {id: id} })
+    .delete(`http://localhost:3001/posts/${id}`)
     .then(res => {
       console.log(res);
     }) 
@@ -96,7 +95,7 @@ const handlePostChange = (event) => {
       type="text" 
       placeholder="Search..." onChange={searchPosts}/>
     </div>
-    <DisplayPosts input={filtered} />
+    {/* <DisplayPosts input={filtered} /> */}
     <div>
     <form onSubmit={addPost}>
       <input
@@ -105,10 +104,11 @@ const handlePostChange = (event) => {
       />
       <button type="submit">Add Post</button>
     </form>
-    <DisplayPosts input={post} />
+    {/* <DisplayPosts input={post} /> */}
     </div>
   </div>
   )
 }
 
 export default App;
+

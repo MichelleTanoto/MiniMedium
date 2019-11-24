@@ -2,7 +2,8 @@ const postRouter = require('express').Router()
 const Post = require('../models/postModel') // allow mongoose functionality
 
 postRouter.get('/posts', (request, response) => {
-    Post.find({}).then(posts => {
+    Post.find({})
+      .then(posts => {
       response.json(posts.map(post => post.toJSON()))
     })
   })
@@ -19,7 +20,7 @@ postRouter.get('/posts', (request, response) => {
       .catch(error => next(error))
   })
   
-  postRouter.post('/posts', (request, response, next) => {
+  postRouter.post('/add', (request, response, next) => {
     const body = request.body
   
     const post = new Post({
@@ -34,7 +35,7 @@ postRouter.get('/posts', (request, response) => {
       .catch(error => next(error))
   })
   
-  postRouter.delete('/post/:id', (request, response, next) => {
+  postRouter.delete('/:id', (request, response, next) => {
     Post.findByIdAndRemove(request.params.id)
       .then(() => {
         response.status(204).end()
@@ -42,7 +43,7 @@ postRouter.get('/posts', (request, response) => {
       .catch(error => next(error))
   })
   
-  postRouter.put('/post/:id', (request, response, next) => {
+  postRouter.put('/posts/:id', (request, response, next) => {
     const body = request.body
   
     const note = {

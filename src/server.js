@@ -4,7 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
-const postRouter = require('./router/routes'); // to use the express routes
+const postRouter = require('./routes/posts'); // to use the express routes
+const userRouter = require('./routes/users')
 const middleware = require('./utils/middleware');
 const mongoose = require('mongoose');
 
@@ -21,11 +22,12 @@ mongoose.connect(config.URI, { useNewUrlParser: true })
 app.use(cors());
 app.use(bodyParser.json());
 app.use(middleware.requestLogger);
-app.use('/api',postRouter);
+app.use('/posts',postRouter);
+app.use('/users',userRouter)
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 
-app.listen(config.PORT || 3000, () => {
+app.listen(config.PORT || 3001, () => {
     console.log(`Server is running on port: ${config.PORT}`);
 });
 
