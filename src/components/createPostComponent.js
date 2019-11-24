@@ -12,7 +12,7 @@ const CreatePost = () => {
          axios
          .get('http://localhost:3001/users/')
          .then(response => {
-          console.log('promise fulfilled')
+          console.log('YaAAA')
           setUsers(response.data)
             })
         }, [])

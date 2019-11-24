@@ -15,7 +15,7 @@ const App = () => {
         <br/>
         <Route path="/" exact component={PostsList} />
          {/* because there is other method using "/" path */}
-         {/* <Route path="/edit/:id" component={EditPost} /> */}
+         <Route path="/edit/:id" component={EditPost} />
         <Route path="/create" component={CreatePost} />
         <Route path="/user" component={CreateUser} />
         </div>
