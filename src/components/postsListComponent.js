@@ -4,24 +4,24 @@ import { Link } from 'react-router-dom';
 
 const PostsList = () => {
     const [post, setPost] = useState([]);
-    const [filtered, setFiltered] = useState(post);
+    const [filtered, setFiltered] = useState([]);
     
     useEffect(() => {
         axios
-          .get('http://localhost:3001/posts')
+          .get('http://localhost:3001/posts/')
           .then(response => {
-            console.log('Yeet')
-            setPost(response.data)
+            console.log('Yeet posts are fetched!')
+            setPost(response.data.map(p =>post.concat(p)))
           })
       }, [])
 
     const searchPosts = (event) => {
         if(event.target.value !== ""){
-          setFiltered(filtered.filter((post) => {
-            post.toLowerCase().includes(event.target.value.toLowerCase());
+          setFiltered(post.filter((post) => {
+            return post.username.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1;
           })
-          )}
-      }
+        )
+      }}
     
     const deletePost = (id) => {  // has error
         let afterDeletion = post;
@@ -45,7 +45,7 @@ const PostsList = () => {
               <td>{props.post.username}</td>
               <td>{props.post.content}</td>
               <td>{props.post.category}</td>
-              <td>{props.post.date.substring(0,10)}</td>
+              <td>{props.post.date}</td>
               <td>
                 <Link to={"/edit/"+props.post.id}>edit</Link> | <a href="#" onClick={() => {deletePost(props.post.id) }}>delete</a>
               </td>

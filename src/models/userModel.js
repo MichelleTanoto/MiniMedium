@@ -8,8 +8,6 @@ const userSchema = new mongoose.Schema({
       trim: true,
       minlength: 3
     },
-  }, {
-    timestamps: true,
   });
 
 userSchema.set('toJSON', {

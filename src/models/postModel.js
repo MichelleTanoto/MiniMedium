@@ -11,8 +11,8 @@ const postSchema = new mongoose.Schema({
     minlength: 1
   },
   category: {
-    type: String,
-    required: true
+    // type: String,
+    // required: true
   },
   date: Date,
 })

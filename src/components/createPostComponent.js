@@ -5,15 +5,15 @@ const CreatePost = () => {
     const [users, setUsers] = useState([]);
     const [username, setUsername] = useState('');
     const [newPost, setNewPost] = useState('');
-    const [tag, setTag] = useState('');
-    const [category, setCategory] = useState(['Technology', 'Business', 'Engineering', 'Art'])
-    
+    const [category, setCategory] = useState(['Technology', 'Business', 'Engineering', 'Art']);
+    const [tag, setTag] = useState(category[0]);
+
      useEffect(() => {
          axios
          .get('http://localhost:3001/users/')
          .then(response => {
-          console.log('YaAAA')
-          setUsers(response.data)
+          console.log('Yeet users are fetched!')
+          setUsers(response.data.map((data) => users.concat(data.username)));
             })
         }, [])
 
@@ -30,74 +30,57 @@ const CreatePost = () => {
         .then(res => {
           res.json("New Post successfully added!");
         })
+        .catch((error) => console.log("shit"))
         setNewPost('');
         }
     
-    const handlePostChange = (event) => {
-        console.log(event.target.value)
-        setNewPost(event.target.value)
-          }
-    
-    const handleUserChange = (event) => {
-        console.log(event.target.value)
-        setUsername(event.target.value)
-    }
-
-    const handleTagChange = (event) => {
-      console.log(event.target.value)
-      setTag(event.target.value)
-    }
-        
+    const handlePostChange = (event) => { setNewPost(event.target.value)}
+    const handleUserChange = (event) => {setUsername(event.target.value)}
+    const handleTagChange = (event) => {setTag(event.target.value)}
 
     return (
         <div>
           <h3>Create New Posts</h3>
           <form onSubmit={addPost}>
-            <div className="form-group"> 
+            <div> 
               <label>Username: </label>
-              <select ref="userInput"
-                  required
-                  className="form-control"
-                  value={username}
-                  onChange={handleUserChange}>
-                  {
-                    users.map(function(user) {
-                      return <option 
-                        key={user}
-                        value={user}>{user}
-                        </option>;
-                    })
-                  }
-              </select>
+              <select 
+             value={username}
+             onChange={handleUserChange}> 
+             {users.map((user) => {
+                return(
+              <option 
+              key={user}
+              value={user}>{user}
+              </option>);
+             }
+      )}
+      </select>   
             </div>
-            <div className="form-group"> 
+            <div> 
               <label>Content: </label>
-              <input  type="text"
-                  required
-                  className="form-control"
+              <input type="text"
                   value={newPost}
                   onChange={handlePostChange}
                   />
             </div>
-            <div className="form-group">
+            <div>
             <label>Category: </label>
-              <select ref="userInput"
-                  required
-                  className="form-control"
+              <select
                   value={tag}
                   onChange={handleTagChange}>
                   {
-                    category.map(function(tag) {
-                      return <option 
+                    category.map((tag) => {
+                      return( <option 
                         key={tag}
                         value={tag}>{tag}
-                        </option>;
+                      </option> );
                     })
                   }
               </select>
             </div>
-            <div className="form-group">
-              <input type="submit" value="Create Post" className="btn btn-primary" />
+            <div>
+              <input type="submit" value="Create Post"/>
             </div>
           </form>
         </div>

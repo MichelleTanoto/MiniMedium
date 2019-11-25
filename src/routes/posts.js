@@ -22,12 +22,12 @@ postRouter.get('/', (request, response) => {
   
   postRouter.post('/add', (request, response, next) => {
     const body = request.body
-  
+
     const post = new Post({
       username: body.username,
       content: body.content,
-      category: tag,
-      date: new Date(),
+      category: body.category,
+      date: body.date,
     })
   
     post.save()
@@ -51,7 +51,7 @@ postRouter.get('/', (request, response) => {
     const post = {
       username: body.username,
       content: body.content,
-      category: tag,
+      category: body.category,
       date: new Date()
     }
   

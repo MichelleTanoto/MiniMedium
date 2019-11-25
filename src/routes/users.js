@@ -2,8 +2,9 @@ const userRouter = require('express').Router();
 let User = require('../models/userModel');
 
 userRouter.route('/').get((req, res,next) => {
-  User.find()
-    .then(users => res.json(users))
+  User.find({})
+    .then(users => res.json(users)) 
+    // .then(users => res.json(users.map(user => user.toJSON())))
     .catch(error => next(error))
 });
 
