@@ -10,7 +10,8 @@ const CreateUser = () => {
       .get('http://localhost:3001/users/')
       .then(response => {
        console.log('Yeet users are fetched!')
-       setUsers(response.data.map((data) => users.concat(data.username)));
+       setUsers(response.data)
+      //  setUsers(response.data.map((data) => users.concat(data)));
          })
      }, [])
 
@@ -18,17 +19,25 @@ const CreateUser = () => {
     
     const addUser = (event) => {
         event.preventDefault();
-        
-        let flag = users.map((user) => {
-        if(user.name === username){return 1}
+    
+    let flag = false;
+    users.map((user) => {
+         console.log(user.username + "####" + username);
+         if(user.username == username){flag=true}
       })
 
         if(flag){
           const ans = window.prompt(`${username} already exist. Replace old username with new one?`)
           if(ans){
-            const user = users.find(user => user.name == username)
+            const user = users.find(user => user.username == username)
             const changedUser = {username: ans}
-            // axios put
+            axios
+            .put(`http://localhost:3001/users/update/${user.id}`,changedUser)
+            .then(response => {
+              setUsers(users.map(u => user.id !== u.id ? u : response.data))
+              console.log("Users are changed!")
+            })
+            .catch(error => console.log("ah shit here we go again")) 
           }
         }
 
@@ -39,8 +48,7 @@ const CreateUser = () => {
         axios
         .post('http://localhost:3001/users/add', newUser)
         .then((res) => {
-           console.log(res.data);
-           setUsername(username.concat(res.data));
+           console.log('Users are created!');
            setUsername('');
          });
         }

@@ -11,7 +11,8 @@ const PostsList = () => {
           .get('http://localhost:3001/posts/')
           .then(response => {
             console.log('Yeet posts are fetched!')
-            setPost(response.data.map(p =>post.concat(p)))
+            setPost(response.data)
+            setFiltered(response.data)
           })
       }, [])
 
@@ -24,19 +25,11 @@ const PostsList = () => {
       }}
     
     const deletePost = (id) => {  // has error
-        let afterDeletion = post;
-        afterDeletion.some((el,i) => {
-          if(el === id){
-            afterDeletion.splice(i,1);
-            return true;
-          }
-        })
-        setPost(afterDeletion);
-
         axios
-        .delete(`http://localhost:3001/posts/${id}`)
+        .delete(`http://localhost:3001/posts/${post.id}`)
         .then(res => {
-          console.log(res);
+          setPost(post.filter(p => p.id != id));
+          console.log('Post are deleted!');
         }) 
         }
 

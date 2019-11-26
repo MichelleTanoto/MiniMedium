@@ -12,9 +12,14 @@ const CreatePost = () => {
          axios
          .get('http://localhost:3001/users/')
          .then(response => {
-          console.log('Yeet users are fetched!')
-          setUsers(response.data.map((data) => users.concat(data.username)));
+          console.log('Yeet users are fetched!') 
+          // setUsers(response.data.map((data) => users.concat(data.username))); ???
+          setUsers(response.data)
+          return response; // every promise chain needs to return something
             })
+         .then(response =>{
+           setUsername(response.data[0].username);
+         })
         }, [])
 
     const addPost = (event) => {
@@ -50,8 +55,8 @@ const CreatePost = () => {
              {users.map((user) => {
                 return(
               <option 
-              key={user}
-              value={user}>{user}
+              key={user.id}
+              value={user.username}>{user.username}
               </option>);
              }
       )}

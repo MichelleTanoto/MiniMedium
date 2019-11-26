@@ -11,6 +11,10 @@ to run ``
 
 
 ## to-do
-3. do future functionality
-5. make the front end pretty
-6. observe medium
+do future functionality
+make the front end pretty
+observe medium
+check editPost and postList
+fix put on createuser
+enhance search lists (google)
+unix command to combine both (server don't work)
