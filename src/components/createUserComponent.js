@@ -22,7 +22,6 @@ const CreateUser = () => {
     
     let flag = false;
     users.map((user) => {
-         console.log(user.username + "####" + username);
          if(user.username == username){flag=true}
       })
 
@@ -37,7 +36,7 @@ const CreateUser = () => {
               setUsers(users.map(u => user.id !== u.id ? u : response.data))
               console.log("Users are changed!")
             })
-            .catch(error => console.log("ah shit here we go again")) 
+            .catch(error => console.log("ah shit here we go again"))   
           }
         }
 
@@ -52,6 +51,7 @@ const CreateUser = () => {
            setUsername('');
          });
         }
+      flag=false;
   }
     return (
       <div>

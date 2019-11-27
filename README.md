@@ -12,9 +12,7 @@ to run ``
 
 ## to-do
 do future functionality
-make the front end pretty
+make the front end pretty (use bootstraps)
+enhance search lists (google)
 observe medium
 check editPost and postList
-fix put on createuser
-enhance search lists (google)
-unix command to combine both (server don't work)
