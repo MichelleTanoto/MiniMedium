@@ -14,16 +14,8 @@ const EditPost = () => {
       .then(response => {
        console.log('YaAAA')
        setUsers(response.data)
-         })
-    axios
-    .get(`http://localhost:3001/users/${1}`)
-    .then(response => {
-      //  setUsername(response.data.username),
-      //  setNewPost(response.data.content),
-      //  setTag(response.data.category)
-      console.log(response.data);
-       });
    }, [])
+  })
   
   const handlePostChange = (event) => {
     console.log(event.target.value)
@@ -51,12 +43,12 @@ const EditPost = () => {
     .post(`http://localhost:3001/posts/update/${1}`,postObject)
     .then(res => console.log("Data updated!"));
 
-  // window.location = '/';
+     window.location = '/';
   }
      
     return (
         <div>
-          <h3>Create New Posts</h3>
+          <h3>Edit Posts</h3>
           <form onSubmit={updatePost}>
             <div className="form-group"> 
               <label>Username: </label>
@@ -108,4 +100,5 @@ const EditPost = () => {
         </div>
         )
 }
+
 export default EditPost;

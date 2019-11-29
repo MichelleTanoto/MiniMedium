@@ -24,7 +24,7 @@ const PostsList = () => {
         )
       }}
     
-    const deletePost = (id) => {  // has error
+    const deletePost = (id) => {
         axios
         .delete(`http://localhost:3001/posts/${post.id}`)
         .then(res => {

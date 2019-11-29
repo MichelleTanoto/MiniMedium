@@ -1,18 +1,27 @@
-# MiniMedium
-
+# Untitled Project
 This project is built as a practical results of my understanding in React.
 
-## Functionality
-currently the basic function is to: add Post, delete Post, search Post
-Future: comment on posts, clap at posts, categorise post based on the material
-
 ## How to Run
-to run ``
+1. Download/clone this project.
+2. write `npm start` on command line.
 
 
 ## to-do
-do future functionality
-make the front end pretty (use bootstraps)
-enhance search lists (google)
-observe medium
-check editPost and postList
+### Front end - Priority
+- How to use bootstrap on react.
+
+### Login page 
+- Frontend (html, css [search google for how to implement it to react])
+- Backend (connecting to database [match to database, partial code already exist in createUserComponent])
+
+### Register page
+- Frontend (html, css [search google for how to implement it to react])
+- Backend (connecting to database [code already exist in createUserComponent])
+
+### Functionality
+- Enhance search lists [google]
+- check edit post and post list [still error]
+
+### Future Plans
+- comment, like, clap at posts.
+- categorise post based on its tags.
