@@ -5,7 +5,6 @@ This project is built as a practical results of my understanding in React.
 1. Download/clone this project.
 2. write `npm start` on command line.
 
-
 ## to-do
 ### Front end - Priority
 - How to use bootstrap on react.
