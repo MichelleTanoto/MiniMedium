@@ -12,11 +12,12 @@ const PostsList = () => {
           .then(response => {
             console.log('Yeet posts are fetched!')
             setPost(response.data)
-            setFiltered(response.data)
+            setFiltered(response.data);
           })
       }, [])
 
     const searchPosts = (event) => {
+        setFiltered(post);
         if(event.target.value !== ""){
           setFiltered(post.filter((post) => {
             return post.username.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1;
@@ -44,7 +45,7 @@ const PostsList = () => {
               </td>
             </tr>
           )
-    const postHandler = () => {
+    const PostHandler = () => {
         return filtered.map(post => {
             return <Post post={post} key={post.id}/>;
           })   
@@ -69,7 +70,7 @@ const PostsList = () => {
               </tr>
             </thead>
             <tbody>
-              {postHandler() }
+              <PostHandler />
             </tbody>
           </table>
         </div>

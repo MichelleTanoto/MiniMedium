@@ -10,21 +10,21 @@ This project is built as a practical results of my understanding in React.
 [x] How to use bootstrap on react
 
 ### Login page 
-[x] Frontend (html, css [search google for how to implement it to react])
-[x] Backend (connecting to database [match to database, partial code already exist in createUserComponent])
-[ ] add Validator
-[ ] add Route to Register 
+- [x] Frontend (html, css [search google for how to implement it to react])
+- [x] Backend (connecting to database [match to database, partial code already exist in createUserComponent])
+- [ ] add Validator
+- [ ] add Route to Register 
 
 ### Register page
-[x] Frontend (html, css [search google for how to implement it to react])
-[x] Backend (connecting to database [code already exist in createUserComponent])
-[ ] add Validator
+- [x] Frontend (html, css [search google for how to implement it to react])
+- [x] Backend (connecting to database [code already exist in createUserComponent])
+- [ ] add Validator
 
 ### Functionality
-[x] Enhance search lists [google]
-[ ] check edit post and post list [still error]
+- [x] Enhance search lists [google]
+- [x] check edit post and post list [still error]
 
 ### Future Plans
-[ ]comment, like, clap at posts.
-[ ]categorise post based on its tags.
-[ ] enhance front end (optional)
+- [ ]comment, like, clap at posts.
+- [ ]categorise post based on its tags.
+- [ ] enhance front end (optional)
