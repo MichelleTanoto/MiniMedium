@@ -5,6 +5,7 @@ import PostsList from "./components/postsListComponent";
 import EditPost from "./components/editPostComponent";
 import CreatePost from "./components/createPostComponent";
 import CreateUser from "./components/createUserComponent";
+import Login from "./components/loginComponent";
 
 const App = () => {
 
@@ -18,6 +19,7 @@ const App = () => {
          <Route path="/edit/:id" component={EditPost} />
         <Route path="/create" component={CreatePost} />
         <Route path="/user" component={CreateUser} />
+        <Route path="/login" component={Login} />
         </div>
      </Router>
   )

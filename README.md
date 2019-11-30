@@ -12,6 +12,7 @@ This project is built as a practical results of my understanding in React.
 ### Login page 
 - Frontend (html, css [search google for how to implement it to react])
 - Backend (connecting to database [match to database, partial code already exist in createUserComponent])
+// onSubmit did not work
 
 ### Register page
 - Frontend (html, css [search google for how to implement it to react])
