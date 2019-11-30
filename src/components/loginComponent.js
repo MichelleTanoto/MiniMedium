@@ -1,5 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import {Form, Button} from 'react-bootstrap';
+import { BrowserRouter as Router, Route, Link} from "react-router-dom";
+import Register from "./registerComponent"
 
 const Login = () => {
    const [username, setUsername] = useState('');
@@ -29,31 +32,70 @@ const Login = () => {
    const matchLogin = (event) => {
      event.preventDefault();
      users.map(u => {
-           if(u.username === username){console.log('username already exist.')}
+           if(u.username == username){
+             if(u.password == password){console.log('Successful Login!');}
+             else{console.log('Password does not match!')}
+             return true;}
    })
+   console.log('Please Register first.')
   }
 
-    return (
-        <form onSubmit={matchLogin}>
-        <label>Username</label><br></br>
-        <input
-          name="username"
-          type="text"
-          placeholder="Enter your Username"
-          value={username}
-          onChange={handleUsernameChange}
-        /><br></br>
-        <label>Password</label><br></br>
-        <input
-          name="password"
-          type="text"
-          placeholder="Enter your password"
-          value={password}
-          onChange={handlePasswordChange}
-        /><br></br>
-        <input type="submit" value="Login"/>
-      </form>
-    );
-  }
+  return(
+  <Form onSubmit={matchLogin}>
+  <Form.Group controlId="formBasicEmail">
+    <Form.Label>Username</Form.Label>
+    <Form.Control 
+    required
+    type="username" 
+    placeholder="Enter Username" 
+    value={username}
+    onChange={handleUsernameChange} />
+    <Form.Text className="text-muted">
+      Please register first if you have not.
+    </Form.Text>
+  </Form.Group>
+
+  <Form.Group controlId="formBasicPassword">
+    <Form.Label>Password</Form.Label>
+    <Form.Control 
+    required 
+    placeholder="Password"
+    value={password}
+    onChange={handlePasswordChange}  />
+  </Form.Group>
+  <Form.Group>
+    <Form.Check 
+    required
+    label="Agree to terms and conditions" 
+    />
+  </Form.Group>
+  <Button variant="primary" type="submit">
+    Submit
+  </Button>
+</Form>
+  )
+}
+  //   return (
+  //       <form onSubmit={matchLogin}>
+  //       <label>Username</label><br></br>
+  //       <input
+  //         name="username"
+  //         type="text"
+  //         placeholder="Enter your Username"
+  //         value={username}
+  //         onChange={handleUsernameChange}
+  //       /><br></br>
+  //       <label>Password</label><br></br>
+  //       <input
+  //         name="password"
+  //         type="text"
+  //         placeholder="Enter your password"
+  //         value={password}
+  //         onChange={handlePasswordChange}
+  //       /><br></br>
+  //       <input type="submit" value="Login"/>
+  //     </form>
+  //   );
+  // }
 
 export default Login;

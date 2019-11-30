@@ -8,6 +8,11 @@ const userSchema = new mongoose.Schema({
       trim: true,
       minlength: 3
     },
+    password: {
+      type: String,
+      required: true,
+      minlength: 3
+    }
   });
 
 userSchema.set('toJSON', {

@@ -8,11 +8,12 @@ userRouter.route('/').get((req, res,next) => {
     .catch(error => next(error))
 });
 
-userRouter.route('/add').post((req, res, next) => {
+userRouter.post('/add',(req, res, next) => {
   const username = req.body.username;
+  const password = req.body.password;
 
-  const newUser = new User({username});
-
+  const newUser = new User({username, password});
+ 
   newUser.save()
     .then(() => res.json('User added!'))
     .catch(error => next(error))
@@ -23,6 +24,7 @@ userRouter.put('/update/:id', (request, response, next) => {
 
   const user = {
     username: body.username,
+    password: body.password
   }
 
   User.findByIdAndUpdate(request.params.id, user, { new: true })
