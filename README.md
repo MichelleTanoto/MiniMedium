@@ -25,6 +25,6 @@ This project is built as a practical results of my understanding in React.
 - [x] check edit post and post list [still error]
 
 ### Future Plans
-- [ ]comment, like, clap at posts.
-- [ ]categorise post based on its tags.
+- [ ] comment, like, clap at posts.
+- [ ] categorise post based on its tags.
 - [ ] enhance front end (optional)
