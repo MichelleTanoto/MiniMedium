@@ -33,13 +33,21 @@ const Login = () => {
      event.preventDefault();
      users.map(u => {
            if(u.username == username){
-             if(u.password == password){console.log('Successful Login!');}
-             else{console.log('Password does not match!')}
-             return true;}
-   })
-   console.log('Please Register first.')
+             if(u.password == password){
+               console.log('Successful Login!');
+               return true;
+              }
+             else{
+               console.log('Password does not match!')
+               return false;
+              }
+            }
+   }
+   )
+   console.log('Please register first.')
+   return false;
   }
-
+   
   return(
   <Form onSubmit={matchLogin}>
   <Form.Group controlId="formBasicEmail">

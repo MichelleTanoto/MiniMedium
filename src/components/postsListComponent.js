@@ -1,10 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
 
 const PostsList = () => {
     const [post, setPost] = useState([]);
-    const [filtered, setFiltered] = useState([]);
+    const [user, setUser] = useState([]);
+    const [filteredPost, setFilteredPost] = useState([]);
+    const [filteredUser, setFilteredUser] = useState([]);
+    const [filteredTag, setFilteredTag] = useState([]);
     
     useEffect(() => {
         axios
@@ -12,18 +16,43 @@ const PostsList = () => {
           .then(response => {
             console.log('Yeet posts are fetched!')
             setPost(response.data)
-            setFiltered(response.data);
+            setFilteredPost(response.data);
+          })
+          axios
+          .get('http://localhost:3001/users/')
+          .then(response => {
+            console.log('Yeet users are fetched!')
+            setUser(response.data)
+            setFilteredUser(response.data);
           })
       }, [])
 
     const searchPosts = (event) => {
-        setFiltered(post);
+         setFilteredPost(post);
         if(event.target.value !== ""){
-          setFiltered(post.filter((post) => {
-            return post.username.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1;
+          setFilteredPost(post.filter((post) => {
+            return post.title.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1;
           })
         )
       }}
+
+      const searchTags = (event) => {
+        setFilteredTag(post.category);
+        if(event.target.value !== ""){
+          setFilteredPost(post.filter((post) => {
+            return post.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1;
+          })
+        )
+      }}
+    
+      const searchUsers = (event) => {
+        setFilteredUser(user);
+       if(event.target.value !== ""){
+         setFilteredUser(user.filter((user) => {
+           return user.username.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1;
+         })
+       )
+     }}
     
     const deletePost = (id) => {
         axios
@@ -35,44 +64,72 @@ const PostsList = () => {
         }
 
     const Post = props => (
-            <tr>
-              <td>{props.post.username}</td>
-              <td>{props.post.content}</td>
-              <td>{props.post.category}</td>
-              <td>{props.post.date}</td>
-              <td>
-                <Link to={"/edit/"+props.post.id}>edit</Link> | <a href="#" onClick={() => {deletePost(props.post.id) }}>delete</a>
-              </td>
-            </tr>
+      <Card>
+  <Card.Header>{props.post.category}</Card.Header>
+  <Card.Body>
+    <Card.Title>{props.post.username}</Card.Title>
+    <Card.Text>
+    {props.post.content}
+    </Card.Text>
+    <Link to={"/edit/"+props.post.id}>edit</Link> | <a href="#" onClick={() => {deletePost(props.post.id) }}>delete</a>
+  </Card.Body>
+</Card>
+            // <tr>
+            //   <td>{props.post.username}</td>
+            //   <td>{props.post.content}</td>
+            //   <td>{props.post.category}</td>
+            //   <td>{props.post.date}</td>
+            //   <td>
+            //     <Link to={"/edit/"+props.post.id}>edit</Link> | <a href="#" onClick={() => {deletePost(props.post.id) }}>delete</a>
+            //   </td>
+            // </tr>
           )
+    
+    const User = props => {
+      return (
+        <div>
+          {props.user.username}
+        </div>
+      )
+    }
+
+    const Tag = props => {
+      return (
+        <div>
+          {props.post.category}
+        </div>
+      )
+    }
+
     const PostHandler = () => {
-        return filtered.map(post => {
+        return filteredPost.map(post => {
             return <Post post={post} key={post.id}/>;
           })   
     }
+
+    const UserHandler = () => {
+      return filteredUser.map(post => {
+          return <User user={user} key={user.id}/>;
+        })   
+  }
+
+  const TagHandler = () => {
+    return filteredTag.map(post => {
+        return <Tag post={post} key={post.id}/>;
+      })   
+}
     
     return (
         <div>
-          <h3>MyMedium Posts</h3>
+          <h3>Untitled Posts</h3>
            <div>
                   <input 
                   type="text" 
-                  placeholder="Search..." onChange={searchPosts}/>
+                  placeholder="Search Untitled" onChange={searchPosts}/>
+                  <a onClick = {<PostHandler />}> Stories </a>
+                  <a onClick = {<UserHandler />}> People </a>
+                  <a onClick = {<TagHandler />}> Tags </a>
             </div>
-          <table className="table">
-            <thead className="thead-light">
-              <tr>
-                <th>Username</th>
-                <th>Content</th>
-                <th>Category</th>
-                <th>Date</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <PostHandler />
-            </tbody>
-          </table>
         </div>
       ) 
 }

@@ -25,6 +25,7 @@ postRouter.get('/', (request, response) => {
 
     const post = new Post({
       username: body.username,
+      title: body.title,
       content: body.content,
       category: body.category,
       date: body.date,
@@ -50,6 +51,7 @@ postRouter.get('/', (request, response) => {
   
     const post = {
       username: body.username,
+      title: body.title,
       content: body.content,
       category: body.category,
       date: new Date()

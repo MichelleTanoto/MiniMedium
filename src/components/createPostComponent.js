@@ -4,6 +4,7 @@ import axios from 'axios';
 const CreatePost = () => {
     const [users, setUsers] = useState([]);
     const [username, setUsername] = useState('');
+    const [title, setTitle] = useState('');
     const [newPost, setNewPost] = useState('');
     const [category, setCategory] = useState(['Technology', 'Business', 'Engineering', 'Art']);
     const [tag, setTag] = useState(category[0]);
@@ -26,6 +27,7 @@ const CreatePost = () => {
         event.preventDefault()
         const postObject = {
           username: username,
+          title: title,
           content: newPost,
           category: tag,
           date: new Date().toISOString()
@@ -42,6 +44,7 @@ const CreatePost = () => {
     const handlePostChange = (event) => { setNewPost(event.target.value)}
     const handleUserChange = (event) => {setUsername(event.target.value)}
     const handleTagChange = (event) => {setTag(event.target.value)}
+    const handleTitleChange = (event) => {setTitle(event.target.value)}
 
     return (
         <div>
@@ -61,6 +64,13 @@ const CreatePost = () => {
              }
       )}
       </select>   
+            </div>
+            <div> 
+              <label>Title: </label>
+              <input type="text"
+                  value={title}
+                  onChange={handleTitleChange}
+                  />
             </div>
             <div> 
               <label>Content: </label>
