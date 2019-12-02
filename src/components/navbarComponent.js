@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { MDBIcon } from "mdbreact";
 
 // untitled = about
 // search = search
@@ -12,7 +13,7 @@ const Navigationbar = () => {
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="mr-auto"></Nav>
     <Nav>
-    <Nav.Link href="/search">Search</Nav.Link>
+    <Nav.Link href="/search"><MDBIcon icon="search"/></Nav.Link>
       <Nav.Link href="/notification">Notification</Nav.Link>
     <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
         <NavDropdown.Item href="/create">New story</NavDropdown.Item>
