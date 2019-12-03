@@ -22,11 +22,12 @@ This project is built as a practical results of my understanding in React.
 
 ### Functionality
 - [x] Enhance search lists [google]
-- [ ] check edit post and post list [still error]
+- [P] check edit post and post list [still error]
 - [x] Make HomePage -- Change Navbar to Medium.
-- [ ] Perfecting search components -- partial code already exist [logic still has flaws.]
+- [P] Perfecting search components -- partial code already exist [logic still has flaws.]
 
 ### Future Plans
 - [ ] comment, like, clap at posts.
 - [ ] categorise post based on its tags (Home page).
 - [ ] enhance front end.
+- [ ] Test backend.

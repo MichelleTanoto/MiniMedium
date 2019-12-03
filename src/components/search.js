@@ -1,17 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Card } from 'react-bootstrap';
-import { MDBCol, MDBFormInline, MDBIcon } from 'mdbreact';
+import { Card, FormControl, Button} from 'react-bootstrap';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Container from 'react-bootstrap/Container';
+import Navigationbar from "./navbar";
 
-const PostsList = () => {
+const SearchPosts = () => {
     const [post, setPost] = useState([]);
     const [user, setUser] = useState([]);
     const [filteredPost, setFilteredPost] = useState([]);
     const [filteredUser, setFilteredUser] = useState([]);
     const [filteredTag, setFilteredTag] = useState([]);
-    const [displayed, setDisplayed] = useState([]);
-    const [flag, setFlag] = useState('');
     
     useEffect(() => {
         axios
@@ -30,25 +30,33 @@ const PostsList = () => {
           })
       }, [])
 
-    const search = (event) => {
+    const searchPosts = (event) => {
          setFilteredPost(post);
-         setFilteredUser(user);
-         setFilteredTag(post.category);
         if(event.target.value !== ""){
           setFilteredPost(post.filter((post) => {
             return post.title.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1;
-          }))
+          })
+        )
+      }}
 
-          setFilteredUser(user.filter((user) => {
-            return user.username.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1;
-          }))
-
-          setFilteredTag(post.filter((post) => {
-            return post.category.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1;
-          }))
+      const searchTags = (event) => {
+        setFilteredTag(post.category);
+        if(event.target.value !== ""){
+          setFilteredPost(post.filter((post) => {
+            return post.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1;
+          })
+        )
       }}
     
-      // error
+      const searchUsers = (event) => {
+        setFilteredUser(user);
+       if(event.target.value !== ""){
+         setFilteredUser(user.filter((user) => {
+           return user.username.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1;
+         })
+       )
+     }}
+    
     const deletePost = (id) => {
         axios
         .delete(`http://localhost:3001/posts/${post.id}`)
@@ -79,39 +87,59 @@ const PostsList = () => {
             //   </td>
             // </tr>
           )
-
-  const DisplaySearch = () => {
-    switch(flag){
-      case '1': 
-      return displayed.map((d) => {
-        return <div> {d.username} </div>
-      })
-      break;
-      default:
-        break;
-    }
-  }
     
-    return (
+    const User = props => {
+      return (
         <div>
-          <h3>Untitled Posts</h3>
-           <div>
-             <MDBCol md="6">
-               <MDBFormInline className="md-form">
-                 <MDBIcon icon="search" />
-                 <input 
-                  type="text" 
-                  placeholder="Search Untitled" onChange={search}/>
-               </MDBFormInline>
-             </MDBCol>
-                  <br/>
-                  <a onClick= {() => {setFlag(1)}}> Stories </a>
-                  <a onClick= {() => {setDisplayed(filteredUser)}}> Users </a>
-                  <a onClick= {() => {setDisplayed(filteredTag)}}> Tags </a>
-                  <DisplaySearch />
-            </div>
+          {props.user.username}
         </div>
+      )
+    }
+
+    const Tag = props => {
+      return (
+        <div>
+          {props.post.category}
+        </div>
+      )
+    }
+
+    const PostHandler = () => {
+        return filteredPost.map(post => {
+            return <Post post={post} key={post.id}/>;
+          })   
+    }
+
+    const UserHandler = () => {
+      return filteredUser.map(post => {
+          return <User user={user} key={user.id}/>;
+        })   
+  }
+
+  const TagHandler = () => {
+    return filteredTag.map(post => {
+        return <Tag post={post} key={post.id}/>;
+      })   
+}
+
+    return(
+      <div>
+      <Navigationbar />
+      <br />
+      <Container>
+      <InputGroup className="mb-3">
+    <FormControl
+      placeholder="Search"
+      aria-label="Search"
+      aria-describedby="basic-addon2"
+    />
+    <InputGroup.Append>
+      <Button variant="outline-secondary">Search Icon</Button>
+    </InputGroup.Append>
+  </InputGroup>
+  </Container>
+  </div>
       ) 
 }
 
-export default PostsList;
+export default SearchPosts;

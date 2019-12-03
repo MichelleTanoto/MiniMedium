@@ -1,19 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router, Route} from "react-router-dom";
-import PostsList from "./components/postsListComponent";
-import EditPost from "./components/editPostComponent";
-import CreatePost from "./components/createPostComponent";
-import Login from "./components/loginComponent";
-import Register from "./components/registerComponent";
-import Home from "./components/homeComponent";
+import EditPost from "./components/editPost";
+import CreatePost from "./components/createPost";
+import Login from "./components/login";
+import Register from "./components/register";
+import Home from "./components/home";
+import SearchPosts from './components/search';
+import Notification from './components/notification';
 
 const App = () => {
 
   return(
     <Router>
       <>
-        <Route path="/" exact component={PostsList} />
-         {/* because there is other method using "/" path */}
+        <Route path="/search" exact component={SearchPosts} />
          <Route path="/edit/:id" component={EditPost} />
         <Route path="/create" component={CreatePost} />
         <Route path="/login" component={Login} />

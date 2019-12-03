@@ -1,12 +1,25 @@
 const userRouter = require('express').Router();
 let User = require('../models/userModel');
 
-userRouter.route('/').get((req, res,next) => {
+userRouter.route('/').get((req, res, next) => {
   User.find({})
     .then(users => res.json(users)) 
     // .then(users => res.json(users.map(user => user.toJSON())))
     .catch(error => next(error))
 });
+
+userRouter.route('/:id').get((req, res, next) => {
+  User.findById(req.params.id)
+  .then(user => {
+    if (user) {
+      res.json(user.toJSON());
+    }
+    else{
+      res.status(404).end()
+    }
+  })
+  .catch(error => next(error))
+})
 
 userRouter.post('/add',(req, res, next) => {
   const username = req.body.username;

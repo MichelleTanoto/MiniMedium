@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {Form, Button} from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link} from "react-router-dom";
-import Register from "./registerComponent"
+import Register from "./register";
+import Container from 'react-bootstrap/Container';
 
 const Login = () => {
    const [username, setUsername] = useState('');
@@ -49,6 +50,8 @@ const Login = () => {
   }
    
   return(
+    <Container>
+      <br />
   <Form onSubmit={matchLogin}>
   <Form.Group controlId="formBasicEmail">
     <Form.Label>Username</Form.Label>
@@ -81,6 +84,7 @@ const Login = () => {
     Submit
   </Button>
 </Form>
+</Container>
   )
 }
   //   return (

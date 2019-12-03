@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import {Form, Button} from 'react-bootstrap'
+import {Form, Button} from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
 
 const Register = () => {
     const [username, setUsername] = useState('');
@@ -53,6 +54,8 @@ const Register = () => {
     //     }
 
     return (
+      <Container>
+      <br />
   <Form onSubmit={addUser}>
   <Form.Group controlId="formBasicEmail">
     <Form.Label>Username</Form.Label>
@@ -77,6 +80,7 @@ const Register = () => {
     Submit
   </Button>
 </Form>
+</Container>
     //   <div>
     //     <h3>Create New User</h3>
     //     <form onSubmit={addUser}>

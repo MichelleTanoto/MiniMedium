@@ -25,19 +25,6 @@ const Navigationbar = () => {
     </Nav>
   </Navbar.Collapse>
 </Navbar>
-      // <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
-      //   <Link to="/" className="navbar-brand">Untitled</Link>
-      //   <div className="collpase navbar-collapse">
-      //   <ul className="navbar-nav mr-auto">
-      //   <li className="navbar-item">
-      //     <Link to="/" className="nav-link">Untitled Posts</Link>
-      //     </li>
-      //     <li className="navbar-item">
-      //     <Link to="/create" className="nav-link">Create Posts</Link>
-      //     </li>
-      //   </ul>
-      //   </div>
-      // </nav>
     );
   }
 
