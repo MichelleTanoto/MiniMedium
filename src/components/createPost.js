@@ -35,7 +35,7 @@ const CreatePost = () => {
         axios
         .post('http://localhost:3001/posts/add', postObject)
         .then(res => {
-          res.json("New Post successfully added!");
+          console.log("New Post successfully added!");
         })
         .catch((error) => console.log("shit"))
         setNewPost('');

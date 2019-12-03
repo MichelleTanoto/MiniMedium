@@ -59,11 +59,11 @@ const SearchPosts = () => {
     
     const deletePost = (id) => {
         axios
-        .delete(`http://localhost:3001/posts/${post.id}`)
+        .delete(`http://localhost:3001/posts/${id}`)
         .then(res => {
-          setPost(post.filter(p => p.id != id));
+          setPost(post.filter(p => p.id !== id));
           console.log('Post are deleted!');
-        }) 
+        })
         }
 
     const Post = props => (
@@ -138,6 +138,7 @@ const SearchPosts = () => {
     </InputGroup.Append>
   </InputGroup>
   </Container>
+  <PostHandler />
   </div>
       ) 
 }

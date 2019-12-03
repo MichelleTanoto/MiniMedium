@@ -14,32 +14,29 @@ const EditPost = (props) => {
       .get(`http://localhost:3001/users/`)
       .then(response => {
        setUsers(response.data);
-      });
-   
-      axios
-      .get(`http://localhost:3001/users/${props.match.params.id}`)
+       return response;
+      })
       .then(response => {
-       setUsername(response.data.username);
-       setPost(response.data.content);
-       setTag(response.data.category);
-   })
+        setUsername(response.data[0].username);
+      })
+   
+  //     axios
+  //     .get(`http://localhost:3001/users/${props.match.params.id}`)
+  //     .then(response => {
+  //      setUsername(response.data.username);
+  //      setTitle(response.data.title);
+  //      setPost(response.data.content);
+  //      setTag(response.data.category);
+  //  })
   }, [])
   
   const handlePostChange = (event) => {setPost(event.target.value)}
+  const handleUserChange = (event) => {setUsername(event.target.value)}
+  const handleTagChange = (event) => {setTag(event.target.value)}
+  const handleTitleChange = (event) => {setTitle(event.target.value)}
 
-  const handleUserChange = (event) => {
-    console.log(event.target.value)
-    setUsername(event.target.value)
-}
-
-  const handleTagChange = (event) => {
-  console.log(event.target.value)
-  setTag(event.target.value)
-}
-  
-const handleTitleChange = (event) => {setTitle(event.target.value)}
-
-  const updatePost = () => {
+  const updatePost = (event) => {
+    event.preventDefault();
     const postObject = {
       username: username,
       title: title,
@@ -48,10 +45,10 @@ const handleTitleChange = (event) => {setTitle(event.target.value)}
       date: new Date().toISOString()
     }
     axios
-    .post(`http://localhost:3001/posts/update/${props.match.params.id}`,postObject)
+    .put(`http://localhost:3001/posts/update/${props.match.params.id}`,postObject)
     .then(res => console.log("Data updated!"));
 
-     window.location = '/';
+     window.location = '/search';
   }
      
     return (
@@ -61,7 +58,6 @@ const handleTitleChange = (event) => {setTitle(event.target.value)}
             <div className="form-group"> 
               <label>Username: </label>
               <select 
-                  required
                   className="form-control"
                   value={username}
                   onChange={handleUserChange}>

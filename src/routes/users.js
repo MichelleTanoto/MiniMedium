@@ -15,6 +15,7 @@ userRouter.route('/:id').get((req, res, next) => {
       res.json(user.toJSON());
     }
     else{
+      console.log("fyck");
       res.status(404).end()
     }
   })
