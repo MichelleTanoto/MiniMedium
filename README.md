@@ -25,6 +25,7 @@ This project is built as a practical results of my understanding in React.
 - [x] check edit post and post list [still error]
 - [x] Make HomePage -- Change Navbar to Medium.
 - [ ] Perfecting search components -- partial code already exist [logic still has flaws.]
+- [ ] Notifications.
 
 ### Future Plans
 - [ ] comment, like, clap at posts.

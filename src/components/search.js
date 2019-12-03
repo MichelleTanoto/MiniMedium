@@ -67,25 +67,26 @@ const SearchPosts = () => {
         }
 
     const Post = props => (
-      <Card>
-  <Card.Header>{props.post.category}</Card.Header>
-  <Card.Body>
-    <Card.Title>{props.post.username}</Card.Title>
-    <Card.Text>
-    {props.post.content}
-    </Card.Text>
-    <Link to={"/edit/"+props.post.id}>edit</Link> | <a href="#" onClick={() => {deletePost(props.post.id) }}>delete</a>
-  </Card.Body>
-</Card>
-            // <tr>
-            //   <td>{props.post.username}</td>
-            //   <td>{props.post.content}</td>
-            //   <td>{props.post.category}</td>
-            //   <td>{props.post.date}</td>
-            //   <td>
-            //     <Link to={"/edit/"+props.post.id}>edit</Link> | <a href="#" onClick={() => {deletePost(props.post.id) }}>delete</a>
-            //   </td>
-            // </tr>
+      <Container>
+      <div>
+        <p><Link to="/profile/:id">{props.post.username}</Link> in <Link to="/category">{props.post.category}</Link> </p>
+        <p> {props.post.date}</p>
+        <h3> {props.post.title}</h3>
+        <p> {props.post.content}</p>
+        <hr />
+        <br />
+      </div>
+      </Container>
+//       <Card>
+//   <Card.Header>{props.post.category}</Card.Header>
+//   <Card.Body>
+//     <Card.Title>{props.post.username}</Card.Title>
+//     <Card.Text>
+//     {props.post.content}
+//     </Card.Text>
+//     <Link to={"/edit/"+props.post.id}>edit</Link> | <a href="#" onClick={() => {deletePost(props.post.id) }}>delete</a>
+//   </Card.Body>
+// </Card>
           )
     
     const User = props => {
