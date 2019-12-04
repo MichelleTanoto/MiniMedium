@@ -12,13 +12,13 @@ This project is built as a practical results of my understanding in React.
 ### Login page 
 - [x] Frontend (html, css [search google for how to implement it to react])
 - [x] Backend (connecting to database [match to database, partial code already exist in createUserComponent])
-- [P] add Validator
-- [ ] add Route to Register 
+- [Opt] add Validator
+- [P] add Route to Register 
 
 ### Register page
 - [x] Frontend (html, css [search google for how to implement it to react])
 - [x] Backend (connecting to database [code already exist in createUserComponent])
-- [P] add Validator
+- [Opt] add Validator
 
 ### Functionality
 - [x] Enhance search lists [google]
@@ -26,9 +26,10 @@ This project is built as a practical results of my understanding in React.
 - [x] Make HomePage -- Change Navbar to Medium.
 - [ ] Perfecting search components -- partial code already exist [logic still has flaws.]
 - [ ] Notifications.
+- [ ] Profile.
+- [ ] comment, like, clap at posts.
 
 ### Future Plans
-- [ ] comment, like, clap at posts.
 - [ ] categorise post based on its tags (Home page).
 - [ ] enhance front end.
 - [ ] Test backend -- editpost, deletepost.

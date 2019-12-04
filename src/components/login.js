@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Link} from "react-router-dom";
 import Register from "./register";
 import Container from 'react-bootstrap/Container';
 
+
 const Login = () => {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
@@ -21,21 +22,21 @@ const Login = () => {
    }, [])
 
    const handleUsernameChange = (event) => {
-       event.preventDefault();
        setUsername(event.target.value);
    }
 
    const handlePasswordChange = (event) => {
-    event.preventDefault();
-    setPassword(event.target.value);
+       setPassword(event.target.value);
    }
 
    const matchLogin = (event) => {
-     event.preventDefault();
+    event.preventDefault();
+    console.log(username + '####' + password);
      users.map(u => {
            if(u.username == username){
              if(u.password == password){
                console.log('Successful Login!');
+               window.location = "/home";
                return true;
               }
              else{

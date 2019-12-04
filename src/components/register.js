@@ -39,19 +39,7 @@ const Register = () => {
                  });
                 }
                 exist=false;
-        }
-
-    //         const user = users.find(user => user.username == username)
-    //         const changedUser = {username: ans}
-    //         axios
-    //         .put(`http://localhost:3001/users/update/${user.id}`,changedUser)
-    //         .then(response => {
-    //           setUsers(users.map(u => user.id !== u.id ? u : response.data))
-    //           console.log("Users are changed!")
-    //         })
-    //         .catch(error => console.log("ah shit here we go again"))   
-    //       }
-    //     }
+              }
 
     return (
       <Container>
@@ -81,23 +69,6 @@ const Register = () => {
   </Button>
 </Form>
 </Container>
-    //   <div>
-    //     <h3>Create New User</h3>
-    //     <form onSubmit={addUser}>
-    //       <div className="form-group"> 
-    //         <label>Username: </label>
-    //         <input  type="text"
-    //             required
-    //             className="form-control"
-    //             value={username}
-    //             onChange={handleUserChange}
-    //             />
-    //       </div>
-    //       <div className="form-group">
-    //         <input type="submit" value="Create User" className="btn btn-primary" />
-    //       </div>
-    //     </form>
-    //   </div>
     )
   }
 
