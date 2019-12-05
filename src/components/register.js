@@ -2,11 +2,16 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {Form, Button} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
+import { Link } from "react-router-dom";
+import Alert from 'react-bootstrap/Alert'
 
 const Register = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [users, setUsers] = useState([]);
+    const [usernameValid, setUsernameValid] = useState(true);
+    const [passwordValid, setPasswordValid] = useState(true);
+    const [valid, setValid] = useState(false);
 
     useEffect(() => {
       axios
@@ -18,17 +23,42 @@ const Register = () => {
          })
      }, [])
 
-    const handleUsernameChange = (event) => {setUsername(event.target.value)}
-    const handlePasswordChange = (event) => {setPassword(event.target.value)}
+    const handleUsernameChange = (event) => {
+      setUsername(event.target.value)
+      validateField('username');
+    }
+      
+    const handlePasswordChange = (event) => {
+      setPassword(event.target.value); 
+      validateField('password');}
     
+    const validateField = (fieldName) => {
+      switch(fieldName){
+        case 'username':
+           for(let i=0; i < users.length; i++)
+           {
+             if(users[i].username == username){setUsernameValid(false);}
+           }
+          break;
+        
+       case 'password':
+          if(password.length < 6) {setPasswordValid(false);}
+          else{setPasswordValid(true);}
+         break;
+
+       default:
+        break;
+       }
+
+       validateForm();
+    }
+
+    const validateForm = () => {
+      setValid(usernameValid && passwordValid)
+    }
+  
     const addUser = (event) => {
         event.preventDefault();
-        let exist= false;
-        users.map((user) => {
-            if(user.username == username){console.log('Username already exist, choose another one.'); exist=true; }
-        })
-
-        if(!exist){
             const newUser = {username: username, password: password}
             axios
                 .post('http://localhost:3001/users/add', newUser)
@@ -37,10 +67,32 @@ const Register = () => {
                    setUsername('');
                    setPassword('');
                  });
-                }
-                exist=false;
-              }
+         }
 
+    const UsernameConfirmation = () =>
+    {
+      if(!usernameValid){
+        return(
+          <div>
+            <Alert variant='danger'>Sorry! username is already taken! please proceed to <Link to="/login">login</Link> if you already make an account with us.</Alert>
+          </div>
+        )
+      }
+      return '';
+    }
+
+    const PasswordConfirmation = () => 
+    {
+      if(!passwordValid){
+      return(
+        <div>
+          <Alert variant='danger'>Password need to be more than 6 characters!</Alert>
+        </div>
+      )
+      }
+      return '';
+    }
+    
     return (
       <Container>
       <br />
@@ -63,13 +115,14 @@ const Register = () => {
     value={password}
     onChange={handlePasswordChange}  />
   </Form.Group>
-
-  <Button variant="primary" type="submit">
+  < UsernameConfirmation />
+  < PasswordConfirmation />
+  <Button variant="primary" type="submit" disabled={!valid}>
     Submit
   </Button>
 </Form>
 </Container>
     )
-  }
+    }
 
 export default Register;
