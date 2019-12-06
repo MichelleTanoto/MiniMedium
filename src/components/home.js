@@ -35,6 +35,22 @@ const Home = () => {
     style={{color: 'grey', textDecoration: 'none'}}>
     Business</Nav.Link>
   </Nav.Item>
+  <Nav.Item>
+    <Nav.Link eventKey="link-4"    
+    style={{color: 'grey', textDecoration: 'none'}}>
+   Culture
+    </Nav.Link>
+  </Nav.Item>
+  <Nav.Item>
+    <Nav.Link eventKey="link-4"    
+    style={{color: 'grey', textDecoration: 'none'}}>
+    Nature</Nav.Link>
+  </Nav.Item>
+  <Nav.Item>
+    <Nav.Link eventKey="link-4"    
+    style={{color: 'grey', textDecoration: 'none'}}>
+    Science</Nav.Link>
+  </Nav.Item>
       </Nav>
     </Container>
   </div>

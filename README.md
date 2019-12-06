@@ -24,13 +24,16 @@ This project is built as a practical results of my understanding in React.
 - [x] Enhance search lists [google]
 - [x] check edit post and post list [still error]
 - [x] Make HomePage -- Change Navbar to Medium.
-- [ ] Perfecting search components -- partial code already exist [logic still has flaws.]
-- [ ] Notifications.
+- [ ] Token
 - [ ] Profile.
-- [P] comment, like, clap at posts.
+- [ ] Perfecting search components -- partial code already exist [logic still has flaws.]
+- [ ] Stories.
+- [ ] comment, like, clap at posts.
+- [ ] categorise post based on its tags (Home page).
 
 ### Future Plans
-- [ ] categorise post based on its tags (Home page).
+- [ ] notifications.
+- [ ] messaging
 - [ ] enhance front end.
-- [ ] enhance register validator.
+- [ ] enhance register and login validator.
 - [ ] Test backend -- editpost, deletepost.

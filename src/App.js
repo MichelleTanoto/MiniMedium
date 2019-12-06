@@ -6,19 +6,23 @@ import Login from "./components/login";
 import Register from "./components/register";
 import Home from "./components/home";
 import SearchPosts from './components/search';
-import Notification from './components/notification';
+import Posts from './components/posts';
+import About from './components/about';
 
 const App = () => {
 
   return(
     <Router>
       <>
+      <Route path="/" exact component={Register} />
         <Route path="/search" exact component={SearchPosts} />
          <Route path="/edit/:id" component={EditPost} />
         <Route path="/create" component={CreatePost} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/home" component={Home} />
+        <Route path="/posts" component={Posts} />
+        <Route path="/about" component={About} />
         </>
      </Router>
   )
