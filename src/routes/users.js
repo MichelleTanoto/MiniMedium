@@ -1,11 +1,13 @@
+const bcrypt = require('bcrypt');
 const userRouter = require('express').Router();
 let User = require('../models/userModel');
 
-userRouter.route('/').get((req, res, next) => {
-  User.find({})
-    .then(users => res.json(users)) 
-    // .then(users => res.json(users.map(user => user.toJSON())))
-    .catch(error => next(error))
+userRouter.route('/').get( async (req, res, next) => {
+  const users = await User.find({})
+  res.json(users);
+    // .then(users => res.json(users)) 
+    // // .then(users => res.json(users.map(user => user.toJSON())))
+    // .catch(error => next(error))
 });
 
 userRouter.route('/:id').get((req, res, next) => {
@@ -22,15 +24,24 @@ userRouter.route('/:id').get((req, res, next) => {
   .catch(error => next(error))
 })
 
-userRouter.post('/add',(req, res, next) => {
-  const username = req.body.username;
-  const password = req.body.password;
+userRouter.post('/add', async (req, res, next) => {
+  try {
+    const body = req.body;
 
-  const newUser = new User({username, password});
+    const saltRounds = 10;
+    const passwordHash = await bcrypt.hash(body.password, saltRounds);
+
+    const newUser = new User({
+      username: body.username,
+      password: passwordHash
+    });
  
-  newUser.save()
-    .then(() => res.json('User added!'))
-    .catch(error => next(error))
+  const savedUser = newUser.save()
+
+  res.json('User added!')
+} catch(exception){
+  next(exception)
+}
 });
 
 userRouter.put('/update/:id', (request, response, next) => {

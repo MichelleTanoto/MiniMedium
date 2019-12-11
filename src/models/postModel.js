@@ -15,10 +15,13 @@ const postSchema = new mongoose.Schema({
     minlength: 1
   },
   category: {
-    // type: String,
-    // required: true
+    type: String,
   },
   date: Date,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 })
 
 postSchema.set('toJSON', {
