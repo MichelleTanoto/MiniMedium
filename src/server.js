@@ -5,7 +5,8 @@ const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
 const postRouter = require('./routes/posts'); // to use the express routes
-const userRouter = require('./routes/users')
+const userRouter = require('./routes/users');
+const loginRouter = require('./routes/login')
 const middleware = require('./utils/middleware');
 const mongoose = require('mongoose');
 
@@ -22,8 +23,10 @@ mongoose.connect(config.URI, { useNewUrlParser: true })
 app.use(cors());
 app.use(bodyParser.json());
 app.use(middleware.requestLogger);
+app.use(middleware.tokenExtractor);
 app.use('/posts',postRouter);
-app.use('/users',userRouter)
+app.use('/users',userRouter);
+app.use('/login',loginRouter);
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 

@@ -3,7 +3,7 @@ const userRouter = require('express').Router();
 let User = require('../models/userModel');
 
 userRouter.route('/').get( async (req, res, next) => {
-  const users = await User.find({})
+  const users = await User.find({}).populate('posts', {title: 1, content: 1, category: 1})
   res.json(users);
     // .then(users => res.json(users)) 
     // // .then(users => res.json(users.map(user => user.toJSON())))
@@ -36,7 +36,7 @@ userRouter.post('/add', async (req, res, next) => {
       password: passwordHash
     });
  
-  const savedUser = newUser.save()
+  const savedUser = await newUser.save()
 
   res.json('User added!')
 } catch(exception){

@@ -12,6 +12,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jquery": "^3.4.1",
+    "jsonwebtoken": "^8.5.1",
     "material-ui": "^0.20.2",
     "mongoose": "^5.7.11",
     "mongoose-unique-validator": "^2.0.3",
@@ -27,7 +28,7 @@
   "author": "Michelle Tanoto",
   "license": "MIT",
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"cd ./src && node server.js\"",
+    "start": "concurrently \"react-scripts start\" \"cd ./src && nodemon server.js \"",
     "build": "react-scripts build",
     "test": "jest --verbose",
     "eject": "react-scripts eject"
@@ -50,6 +51,7 @@
   },
   "devDependencies": {
     "jest": "^24.9.0",
+    "nodemon": "^2.0.2",
     "supertest": "^4.0.2"
   },
   "jest": {

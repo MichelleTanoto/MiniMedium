@@ -1,9 +1,10 @@
 const postRouter = require('express').Router()
 const User = require('../models/userModel');
 const Post = require('../models/postModel'); // allow mongoose functionality
+const jwt = require('jsonwebtoken');
 
 postRouter.get('/', async (request, response) => {
-  const post = await Post.find({});
+  const post = await Post.find({}).populate('user', {username: 1});
   response.json(post);
     // Post.find({})
     //   .then(posts => {
@@ -23,9 +24,28 @@ postRouter.get('/', async (request, response) => {
       next(exception);
     }
   })
+
+//   const getTokenFrom = req => {
+//     const authorisation = req.get('authorization')
+//     if(authorisation && authorisation.toLowerCase().startsWith('bearer ')){
+//       return authorisation.substring(7);
+//   }
+//     return null;
+// }
   
   postRouter.post('/add', async (request, response, next) => {
     const body = request.body
+
+    // const token = getTokenFrom(request);
+
+    try {
+      const decodedToken = jwt.verify(request.token, process.env.SECRET)
+      if(!request.token || !decodedToken.id){
+        return response.status(401).json({ error: 'token missing or invalid'})
+      }
+
+    // has to be findOne
+    const user = await User.findOne({"username" : { $eq: body.username } } )
 
     const post = new Post({
       username: body.username,
@@ -33,19 +53,17 @@ postRouter.get('/', async (request, response) => {
       content: body.content,
       category: body.category,
       date: body.date,
+      user: user._id
     })
+
     // error handling
-    try{
     const savedPost = await post.save();
+    user.posts = await user.posts.concat(savedPost._id);
+    await user.save()
     response.json(savedPost.toJSON());
     } catch(exception){
       next(exception);
     }
-    // post.save()
-    //   .then(savedPost => {
-    //     response.json(savedPost.toJSON())
-    //   })
-    //   .catch(error => next(error))
   })
   
   postRouter.delete('/:id', async (request, response, next) => {
