@@ -1,3 +1,5 @@
+// Need to have 3 parameters except the last middleware only need 2
+
 const requestLogger = (request, response, next) => {
     console.log('Method:', request.method)
     console.log('Path:  ', request.path)
@@ -23,13 +25,13 @@ const requestLogger = (request, response, next) => {
     next(error)
   }
 
-  const tokenExtractor = (request,next) => {
+  const tokenExtractor = (request, response, next) => {
       const authorisation = request.get('authorization')
       if(authorisation && authorisation.toLowerCase().startsWith('bearer ')){
         request.token = authorisation.substring(7);
       }
       else { request.token = null;}
-      next();
+      next(); //error
   } 
 
   module.exports = {

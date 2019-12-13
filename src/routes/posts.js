@@ -67,6 +67,7 @@ postRouter.get('/', async (request, response) => {
   })
   
   postRouter.delete('/:id', async (request, response, next) => {
+    // delete jsonwebtoken
     try{
     await Post.findByIdAndRemove(request.params.id);
     response.status(204).end();
