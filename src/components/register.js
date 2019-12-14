@@ -2,15 +2,14 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {Form, Button} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
+import Error from "./error";
 import { Link } from "react-router-dom";
-import Alert from 'react-bootstrap/Alert'
 
 const Register = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [users, setUsers] = useState([]);
-    const [usernameValid, setUsernameValid] = useState(true);
-    const [passwordValid, setPasswordValid] = useState(true);
+    const [error, setError] = useState(null);
     const [valid, setValid] = useState(false);
 
     useEffect(() => {
@@ -23,8 +22,8 @@ const Register = () => {
          })
      }, [])
 
-    const handleUsernameChange = (event) => {
-      setUsername(event.target.value)
+    const handleUsernameChange = async (event) => {
+      await setUsername(event.target.value)
       validateField('username');
     }
       
@@ -37,24 +36,22 @@ const Register = () => {
         case 'username':
            for(let i=0; i < users.length; i++)
            {
-             if(users[i].username == username){setUsernameValid(false);}
+             if(users[i].username === username){console.log(error); setError("Username already exist.")}
            }
           break;
         
        case 'password':
-          if(password.length < 6) {setPasswordValid(false);}
-          else{setPasswordValid(true);}
+          if(password.length < 6) {setError("password must be more than 6 characters.");}
          break;
 
        default:
         break;
        }
-
        validateForm();
     }
 
     const validateForm = () => {
-      setValid(usernameValid && passwordValid)
+      if(error === null){setValid(true);}
     }
   
     const addUser = (event) => {
@@ -68,30 +65,6 @@ const Register = () => {
                    setPassword('');
                  });
          }
-
-    const UsernameConfirmation = () =>
-    {
-      if(!usernameValid){
-        return(
-          <div>
-            <Alert variant='danger'>Sorry! username is already taken! please proceed to <Link to="/login">login</Link> if you already make an account with us.</Alert>
-          </div>
-        )
-      }
-      return '';
-    }
-
-    const PasswordConfirmation = () => 
-    {
-      if(!passwordValid){
-      return(
-        <div>
-          <Alert variant='danger'>Password need to be more than 6 characters!</Alert>
-        </div>
-      )
-      }
-      return '';
-    }
     
     return (
       <Container>
@@ -115,12 +88,11 @@ const Register = () => {
     value={password}
     onChange={handlePasswordChange}  />
   </Form.Group>
-  < UsernameConfirmation />
-  < PasswordConfirmation />
   <Button variant="primary" type="submit" disabled={!valid}>
     Submit
   </Button>
 </Form>
+<Error messsage={error} />
 </Container>
     )
     }

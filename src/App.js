@@ -8,6 +8,7 @@ import Home from "./components/home";
 import SearchPosts from './components/search';
 import Posts from './components/posts';
 import About from './components/about';
+import Logout from './components/logout';
 
 const App = () => {
 
@@ -19,6 +20,7 @@ const App = () => {
          <Route path="/edit/:id" component={EditPost} />
         <Route path="/create" component={CreatePost} />
         <Route path="/login" component={Login} />
+        <Route path="/logout" component={Logout} />
         <Route path="/register" component={Register} />
         <Route path="/home" component={Home} />
         <Route path="/posts" component={Posts} />

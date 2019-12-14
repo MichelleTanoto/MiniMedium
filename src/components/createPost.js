@@ -23,8 +23,10 @@ const CreatePost = () => {
          })
         }, [])
 
+
     const addPost = (event) => {
         event.preventDefault()
+
         const postObject = {
           username: username,
           title: title,
@@ -32,6 +34,7 @@ const CreatePost = () => {
           category: tag,
           date: new Date().toISOString()
         }
+
         axios
         .post('http://localhost:3001/posts/add', postObject)
         .then(res => {

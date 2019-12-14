@@ -1,59 +1,57 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import {Form, Button} from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link} from "react-router-dom";
-import Register from "./register";
+import Error from "./error";
 import Container from 'react-bootstrap/Container';
 
 
 const Login = () => {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
-   const [users, setUsers] = useState([]);
+   const [user, setUser] = useState(null);
+   const [error, setError] = useState(null);
 
-   useEffect(() => {
-    axios
-    .get('http://localhost:3001/users/')
-    .then(response => {
-     console.log('Yeet users are fetched!')
-     setUsers(response.data)
-    //  setUsers(response.data.map((data) => users.concat(data)));
-       })
-   }, [])
+   let token = null;
 
-   const handleUsernameChange = (event) => {
-       setUsername(event.target.value);
+   const setToken = newToken => {
+     token = `bearer ${newToken}`;
    }
 
-   const handlePasswordChange = (event) => {
-       setPassword(event.target.value);
-   }
+   const handleLogin = async (event) => {
+     event.preventDefault();
+    
+     try {
+       const config = {
+         headers: { Authorization : token },
+       }
 
-   const matchLogin = (event) => {
-    event.preventDefault();
-    console.log(username + '####' + password);
-     users.map(u => {
-           if(u.username == username){
-             if(u.password == password){
-               console.log('Successful Login!');
-               window.location = "/home";
-               return true;
-              }
-             else{
-               console.log('Password does not match!')
-               return false;
-              }
-            }
+       const user = await 
+       axios
+       .post('http://localhost:3001/login/', {"username" : username, "password" : password}, config)
+       .then(response => response.data)
+
+       window.localStorage.setItem('loggedInUser', JSON.stringify(user)
+       )
+       
+       setToken(user.token)
+       setUser(user);
+       setUsername('');
+       setPassword('');
+
+       window.location = "/home";
+     } catch(exception){
+       setError('Wrong credentials')
+       setTimeout(() => {
+         setError(null);
+       },5000)
+     }
    }
-   )
-   console.log('Please register first.')
-   return false;
-  }
    
   return(
     <Container>
       <br />
-  <Form onSubmit={matchLogin}>
+  <Form onSubmit={handleLogin}>
   <Form.Group controlId="formBasicEmail">
     <Form.Label>Username</Form.Label>
     <Form.Control 
@@ -61,7 +59,7 @@ const Login = () => {
     type="username" 
     placeholder="Enter Username" 
     value={username}
-    onChange={handleUsernameChange} />
+    onChange={({ target }) => setUsername(target.value)} />
     <Form.Text className="text-muted">
       Please register first if you have not.
     </Form.Text>
@@ -73,7 +71,7 @@ const Login = () => {
     required 
     placeholder="Password"
     value={password}
-    onChange={handlePasswordChange}  />
+    onChange={({ target }) => setPassword(target.value)}  />
   </Form.Group>
   <Form.Group>
     <Form.Check 
@@ -85,30 +83,9 @@ const Login = () => {
     Submit
   </Button>
 </Form>
+<Error message={error} />
 </Container>
   )
 }
-  //   return (
-  //       <form onSubmit={matchLogin}>
-  //       <label>Username</label><br></br>
-  //       <input
-  //         name="username"
-  //         type="text"
-  //         placeholder="Enter your Username"
-  //         value={username}
-  //         onChange={handleUsernameChange}
-  //       /><br></br>
-  //       <label>Password</label><br></br>
-  //       <input
-  //         name="password"
-  //         type="text"
-  //         placeholder="Enter your password"
-  //         value={password}
-  //         onChange={handlePasswordChange}
-  //       /><br></br>
-  //       <input type="submit" value="Login"/>
-  //     </form>
-  //   );
-  // }
 
 export default Login;

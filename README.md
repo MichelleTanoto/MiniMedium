@@ -24,9 +24,9 @@ This project is built as a practical results of my understanding in React.
 - [x] Enhance search lists [google]
 - [x] check edit post and post list [still error]
 - [x] Make HomePage -- Change Navbar to Medium.
-- [ ] comment, like, clap at posts.
-- [ ] Hash front end.
 - [x] Token
+- [x] Hash password.
+- [ ] comment, like, clap at posts.
 - [ ] Profile.
 - [ ] Perfecting search components -- partial code already exist [logic still has flaws.]
 - [ ] Stories.

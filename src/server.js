@@ -23,7 +23,7 @@ mongoose.connect(config.URI, { useNewUrlParser: true })
 app.use(cors());
 app.use(bodyParser.json());
 app.use(middleware.requestLogger);
-app.use(middleware.tokenExtractor);
+// app.use(middleware.tokenExtractor);
 app.use('/posts',postRouter);
 app.use('/users',userRouter);
 app.use('/login',loginRouter);

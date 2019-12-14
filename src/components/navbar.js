@@ -20,7 +20,7 @@ const Navigationbar = () => {
         <NavDropdown.Divider />
         <NavDropdown.Item href="#action/3.3">Profile</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.4">Settings</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.4">Sign out</NavDropdown.Item>
+        <NavDropdown.Item href="/logout">Sign out</NavDropdown.Item>
       </NavDropdown>
     </Nav>
   </Navbar.Collapse>
