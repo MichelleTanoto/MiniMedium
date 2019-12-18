@@ -24,6 +24,21 @@ userRouter.route('/:id').get((req, res, next) => {
   .catch(error => next(error))
 })
 
+userRouter.get('/:id/posts', async (request, response, next) =>{
+  try{
+    const user = await User.findById(request.params.id).populate('posts', {title: 1, content: 1, category: 1})
+    console.log(user);
+    if(user){
+      // response.json(JSON.stringify(user.posts));
+      response.json(user.posts);
+    } else {
+      response.status(404).end();
+    }
+    } catch(exception) {
+      next(exception);
+    }
+})
+
 userRouter.post('/add', async (req, res, next) => {
   try {
     const body = req.body;

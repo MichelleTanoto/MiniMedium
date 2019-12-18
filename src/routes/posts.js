@@ -25,20 +25,6 @@ postRouter.get('/', async (request, response) => {
     }
   })
 
-  postRouter.get('/:id/posts', async (request, response, next) =>{
-    try{
-      const post = await Post.findById(request.params.id)
-      console.log(post);
-      if(post){
-        response.json(post.posts.toJSON());
-      } else {
-        response.status(404).end();
-      }
-      } catch(exception) {
-        next(exception);
-      }
-  })
-
 //   const getTokenFrom = req => {
 //     const authorisation = req.get('authorization')
 //     if(authorisation && authorisation.toLowerCase().startsWith('bearer ')){

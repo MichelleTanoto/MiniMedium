@@ -13,7 +13,7 @@ const Posts = () => {
     console.log(parsedUser.id);
 
     axios
-    .get(`http://localhost:3001/posts/${parsedUser.id}`)
+    .get(`http://localhost:3001/users/${parsedUser.id}/posts`)
     .then(response => {
       console.log('Yeet posts are fetched!')
       setPosts(response.data)
