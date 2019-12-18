@@ -26,8 +26,8 @@ This project is built as a practical results of my understanding in React.
 - [x] Make HomePage -- Change Navbar to Medium.
 - [x] Token
 - [x] Hash password.
-- [P] like at posts.
 - [x] Stories based on what the author wrote
+- [x] like at posts.
 - [P] delete based on them.
 - [ ] Profile.
 - [ ] Perfecting search components -- partial code already exist [logic still has flaws.]

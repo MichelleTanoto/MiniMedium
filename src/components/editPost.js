@@ -3,23 +3,11 @@ import axios from 'axios';
 
 const EditPost = (props) => {
   const [users, setUsers] = useState([]);
-  const [username, setUsername] = useState('');
   const [title, setTitle] = useState('');
   const [post, setPost] = useState('');
   const [tag, setTag] = useState('');
   const [category, setCategory] = useState(['Technology', 'Business', 'Engineering', 'Art'])
     
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3001/users/`)
-      .then(response => {
-       setUsers(response.data);
-       return response;
-      })
-      .then(response => {
-        setUsername(response.data[0].username);
-      })
-   
   //     axios
   //     .get(`http://localhost:3001/users/${props.match.params.id}`)
   //     .then(response => {
@@ -28,17 +16,14 @@ const EditPost = (props) => {
   //      setPost(response.data.content);
   //      setTag(response.data.category);
   //  })
-  }, [])
   
   const handlePostChange = (event) => {setPost(event.target.value)}
-  const handleUserChange = (event) => {setUsername(event.target.value)}
   const handleTagChange = (event) => {setTag(event.target.value)}
   const handleTitleChange = (event) => {setTitle(event.target.value)}
 
   const updatePost = (event) => {
     event.preventDefault();
     const postObject = {
-      username: username,
       title: title,
       content: post,
       category: tag,
@@ -55,22 +40,6 @@ const EditPost = (props) => {
         <div>
           <h3>Edit Posts</h3>
           <form onSubmit={updatePost}>
-            <div className="form-group"> 
-              <label>Username: </label>
-              <select 
-                  className="form-control"
-                  value={username}
-                  onChange={handleUserChange}>
-                  {
-                    users.map((user) => {
-                      return <option 
-                        key={user.id}
-                        value={user.username}>{user.username}
-                        </option>;
-                    })
-                  }
-              </select>
-            </div>
             <div className="form-group"> 
               <label>Title: </label>
               <input type="text"

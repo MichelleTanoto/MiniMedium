@@ -42,11 +42,11 @@ const Posts = () => {
       return(
         <Container>
         <div>
-          <p><Link to={`/profile/${props.post.id}`}>{props.post.username}</Link> in <Link to="/category">{props.post.category}</Link> </p>
+          <Link to="/category">{props.post.category}</Link> 
           <p> {props.post.date}</p>
           <h3> {props.post.title}</h3>
           <p> {props.post.content}</p>
-          {/* <button onClick= {handleClick()}>{likes}</button> */}
+          <button onClick= {() => {handleClick()}}>{likes}</button>
           <hr />
           <br />
         </div>

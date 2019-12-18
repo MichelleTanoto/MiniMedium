@@ -4,7 +4,6 @@ import service from '../utils/token';
 
 const CreatePost = () => {
     const [users, setUsers] = useState([]);
-    const [username, setUsername] = useState('');
     const [title, setTitle] = useState('');
     const [newPost, setNewPost] = useState('');
     const [category, setCategory] = useState(['Technology', 'Business', 'Engineering', 'Art']);
@@ -20,25 +19,10 @@ const CreatePost = () => {
       } 
   }, [])
 
-     useEffect(() => {
-         axios
-         .get('http://localhost:3001/users/')
-         .then(response => {
-          console.log('Yeet users are fetched!') 
-          // setUsers(response.data.map((data) => users.concat(data.username))); ???
-          setUsers(response.data)
-          return response; // every promise chain needs to return something
-            })
-         .then(response =>{
-           setUsername(response.data[0].username);
-         })
-        }, []) 
-
     const addPost = (event) => {
         event.preventDefault()
 
         const postObject = {
-          username: username,
           title: title,
           content: newPost,
           category: tag,
@@ -62,7 +46,6 @@ const CreatePost = () => {
       }
     
     const handlePostChange = (event) => { setNewPost(event.target.value)}
-    const handleUserChange = (event) => {setUsername(event.target.value)}
     const handleTagChange = (event) => {setTag(event.target.value)}
     const handleTitleChange = (event) => {setTitle(event.target.value)}
 
@@ -70,21 +53,6 @@ const CreatePost = () => {
         <div>
           <h3>Create New Posts</h3>
           <form onSubmit={addPost}>
-            <div> 
-              <label>Username: </label>
-              <select 
-             value={username}
-             onChange={handleUserChange}> 
-             {users.map((user) => {
-                return(
-              <option 
-              key={user.id}
-              value={user.username}>{user.username}
-              </option>);
-             }
-      )}
-      </select>   
-            </div>
             <div> 
               <label>Title: </label>
               <input type="text"

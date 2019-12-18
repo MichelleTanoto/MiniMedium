@@ -46,10 +46,9 @@ postRouter.get('/', async (request, response) => {
       }
 
     // has to be findOne
-    const user = await User.findOne({"username" : { $eq: body.username } } )
+    const user = await User.findById(decodedToken.id)
 
     const post = new Post({
-      username: body.username,
       title: body.title,
       content: body.content,
       category: body.category,
@@ -86,7 +85,6 @@ postRouter.get('/', async (request, response) => {
     const body = request.body
   
     const post = {
-      username: body.username,
       title: body.title,
       content: body.content,
       category: body.category,
