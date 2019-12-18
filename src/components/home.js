@@ -1,9 +1,22 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Navigationbar from "./navbar";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
+import service from '../utils/token';
 
 const Home = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedInUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      console.log(user.token);
+      service.setToken(user.token);
+    }
+  }, [])
+
     return(
     <div>
         <Navigationbar />

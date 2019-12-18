@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import create from '../utils/token';
+import service from '../utils/token';
 
 const CreatePost = () => {
     const [users, setUsers] = useState([]);
@@ -22,7 +22,7 @@ const CreatePost = () => {
          .then(response =>{
            setUsername(response.data[0].username);
          })
-        }, [])
+        }, []) 
 
     const addPost = (event) => {
         event.preventDefault()
@@ -35,7 +35,7 @@ const CreatePost = () => {
           date: new Date().toISOString()
         }
 
-        create(postObject)
+        service.create(postObject)
         .then(res => {
           console.log("New Post successfully added!"); 
           setNewPost('');

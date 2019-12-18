@@ -4,23 +4,12 @@ import {Form, Button} from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link} from "react-router-dom";
 import Error from "./error";
 import Container from 'react-bootstrap/Container';
-import setToken from '../utils/token';
-
+import service from '../utils/token';
 
 const Login = () => {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
-   const [user, setUser] = useState(null);
    const [error, setError] = useState(null);
-
-   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedInUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-      setToken(user.token)
-    }
-  }, [])
 
    const handleLogin = async (event) => {
      event.preventDefault();
@@ -35,9 +24,8 @@ const Login = () => {
        window.localStorage.setItem('loggedInUser', JSON.stringify(user)
        )
        
-       setToken(user.token)
-  
-       setUser(user);
+      service.setToken(user.token)
+
        setUsername('');
        setPassword('');
 
