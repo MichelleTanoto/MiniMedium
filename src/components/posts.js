@@ -8,31 +8,34 @@ const Posts = () => {
     const [likes, setLikes] = useState(0);
 
     useEffect(() => {
+    const user = window.localStorage.getItem('loggedInUser')
+    const parsedUser = JSON.parse(user)
+    console.log(parsedUser.id);
+
     axios
-    .get('http://localhost:3001/posts/')
+    .get(`http://localhost:3001/posts/${parsedUser.id}`)
     .then(response => {
       console.log('Yeet posts are fetched!')
       setPosts(response.data)
     })
   }, [])
     
-    const addLikes = (props) =>
+    const handleClick = (props) =>
     {
-      let like;
-      setLikes(like++);
+      setLikes(likes + 1);
 
-      const postObject = {
-        username: props.username,
-        title: props.title,
-        content: props.post,
-        category: props.category,
-        date: new Date().toISOString(),
-        likes: props.likes
-      }
+      // const postObject = {
+      //   username: props.username,
+      //   title: props.title,
+      //   content: props.post,
+      //   category: props.category,
+      //   date: new Date().toISOString(),
+      //   likes: props.likes
+      // }
 
-      axios
-      .put(`http://localhost:3001/posts/update/${props.id}`, postObject)
-      .then(response => response.data)
+      // axios
+      // .put(`http://localhost:3001/posts/update/${props.id}`, postObject)
+      // .then(response => response.data)
     }
 
     const Post = (props) => {
@@ -43,16 +46,13 @@ const Posts = () => {
           <p> {props.post.date}</p>
           <h3> {props.post.title}</h3>
           <p> {props.post.content}</p>
-          <button onClick= {addLikes(props.post)}>Like</button>
-          <p> {likes}</p>
+          {/* <button onClick= {handleClick()}>{likes}</button> */}
           <hr />
           <br />
         </div>
         </Container>
       )
     }
-
-
 
     const postHandler = () => {
       return posts.map(post => {

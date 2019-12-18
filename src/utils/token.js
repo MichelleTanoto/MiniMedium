@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/posts'
+const baseUrl = 'http://localhost:3001/posts/add'
 
 let token = null 
 
@@ -12,7 +12,7 @@ const create = async newObject => {
   const config = {
     headers: { Authorization: token },
   }
-  
+  console.log(token);
   const response = await axios.post(baseUrl, newObject, config)
   return response.data
 }

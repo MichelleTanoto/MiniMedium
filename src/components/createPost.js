@@ -10,6 +10,16 @@ const CreatePost = () => {
     const [category, setCategory] = useState(['Technology', 'Business', 'Engineering', 'Art']);
     const [tag, setTag] = useState(category[0]);
 
+    useEffect(() => {
+      const loggedUserJSON = window.localStorage.getItem('loggedInUser')
+      if (loggedUserJSON) {
+        const user = JSON.parse(loggedUserJSON);
+        console.log(user.username);
+        console.log(user);
+        service.setToken(user.token)
+      } 
+  }, [])
+
      useEffect(() => {
          axios
          .get('http://localhost:3001/users/')
@@ -112,4 +122,4 @@ const CreatePost = () => {
         )
 }
 
-export default { CreatePost }
+export default CreatePost
