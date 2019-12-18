@@ -17,6 +17,9 @@ const postSchema = new mongoose.Schema({
   category: {
     type: String,
   },
+  likes: {
+    type: Number,
+  },
   date: Date,
   user: {
     type: mongoose.Schema.Types.ObjectId,

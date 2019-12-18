@@ -53,7 +53,7 @@ postRouter.get('/', async (request, response) => {
       content: body.content,
       category: body.category,
       date: body.date,
-      user: user._id
+      user: user._id,
     })
 
     // error handling
@@ -89,7 +89,8 @@ postRouter.get('/', async (request, response) => {
       title: body.title,
       content: body.content,
       category: body.category,
-      date: new Date()
+      date: new Date(),
+      likes: body.likes
     }
   
     Post.findByIdAndUpdate(request.params.id, post, { new: true })
@@ -98,5 +99,6 @@ postRouter.get('/', async (request, response) => {
       })
       .catch(error => next(error))
   })
+
 
 module.exports = postRouter

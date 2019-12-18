@@ -26,13 +26,14 @@ This project is built as a practical results of my understanding in React.
 - [x] Make HomePage -- Change Navbar to Medium.
 - [x] Token
 - [x] Hash password.
-- [ ] comment, like, clap at posts.
+- [x] like at posts.
+- [ ] Stories.
 - [ ] Profile.
 - [ ] Perfecting search components -- partial code already exist [logic still has flaws.]
-- [ ] Stories.
 - [ ] categorise post based on its tags (Home page).
 
 ### Future Plans
+- [ ] comments
 - [ ] notifications.
 - [ ] messaging
 - [ ] enhance front end.

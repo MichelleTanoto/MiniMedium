@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {Form, Button} from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link} from "react-router-dom";
 import Error from "./error";
 import Container from 'react-bootstrap/Container';
+import setToken from '../utils/token';
 
 
 const Login = () => {
@@ -12,35 +13,37 @@ const Login = () => {
    const [user, setUser] = useState(null);
    const [error, setError] = useState(null);
 
-   let token = null;
-
-   const setToken = newToken => {
-     token = `bearer ${newToken}`;
-   }
+   useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedInUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      setToken(user.token)
+    }
+  }, [])
 
    const handleLogin = async (event) => {
      event.preventDefault();
     
      try {
-       const config = {
-         headers: { Authorization : token },
-       }
 
        const user = await 
        axios
-       .post('http://localhost:3001/login/', {"username" : username, "password" : password}, config)
+       .post('http://localhost:3001/login/', {"username" : username, "password" : password})
        .then(response => response.data)
 
        window.localStorage.setItem('loggedInUser', JSON.stringify(user)
        )
        
        setToken(user.token)
+  
        setUser(user);
        setUsername('');
        setPassword('');
 
        window.location = "/home";
      } catch(exception){
+       console.log(exception);
        setError('Wrong credentials')
        setTimeout(() => {
          setError(null);

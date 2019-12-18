@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import create from '../utils/token';
 
 const CreatePost = () => {
     const [users, setUsers] = useState([]);
@@ -23,7 +24,6 @@ const CreatePost = () => {
          })
         }, [])
 
-
     const addPost = (event) => {
         event.preventDefault()
 
@@ -35,14 +35,21 @@ const CreatePost = () => {
           date: new Date().toISOString()
         }
 
-        axios
-        .post('http://localhost:3001/posts/add', postObject)
+        create(postObject)
         .then(res => {
-          console.log("New Post successfully added!");
+          console.log("New Post successfully added!"); 
+          setNewPost('');
         })
         .catch((error) => console.log("shit"))
-        setNewPost('');
-        }
+        // axios
+        // .post('http://localhost:3001/posts/add', postObject, config)
+        // .then(res => {
+        //   console.log("New Post successfully added!");
+        // })
+        // .catch((error) => console.log("shit"))
+        // setNewPost('');
+        // }
+      }
     
     const handlePostChange = (event) => { setNewPost(event.target.value)}
     const handleUserChange = (event) => {setUsername(event.target.value)}
@@ -105,4 +112,4 @@ const CreatePost = () => {
         )
 }
 
-export default CreatePost;
+export default { CreatePost }
