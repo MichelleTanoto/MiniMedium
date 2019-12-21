@@ -54,21 +54,30 @@ userRouter.post('/add', async (req, res, next) => {
  
   const savedUser = await newUser.save()
 
-  const chatkitUser = await chatkit
-  .createUser({
-    id: req.body,
-    name: req.body
-  })
+  // const chatkitUser = await chatkit
+  // .createUser({
+  //   id: req.body,
+  //   name: req.body
+  // })
 
-  if(chatkitUser){
-    console.log('chatkit succesful.')
-  }
-  
-
-  res.json('User added!')
+  // if(chatkitUser){
+  //   console.log('chatkit succesful.')
+  //   res.json('User added!')
+  // } 
 } catch(exception){
+  if(exception.error === 'services/chatkit/user_already_exists'){
+    console.log(`User already exists`)
+  } else {
   next(exception)
+  }
 }
+});
+
+userRouter.post('/authenticate', (req, res) => {
+  const authData = chatkit.authenticate({
+    userId: req.query.user_id,
+  });
+  res.status(authData.status).send(authData.body);
 });
 
 userRouter.put('/update/:id', (request, response, next) => {

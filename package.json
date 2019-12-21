@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@pusher/chatkit-client": "^1.13.3",
     "@pusher/chatkit-server": "^2.4.0",
     "axios": "^0.19.0",
     "bcrypt": "^3.0.7",
@@ -24,7 +25,8 @@
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.3.0",
-    "react-select": "^3.0.8"
+    "react-select": "^3.0.8",
+    "skeleton-css": "^2.0.4"
   },
   "author": "Michelle Tanoto",
   "license": "MIT",
