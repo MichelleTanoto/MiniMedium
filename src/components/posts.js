@@ -22,21 +22,30 @@ const Posts = () => {
     
     const handleClick = (props) =>
     {
-      setLikes(likes + 1);
+       setLikes(likes + 1);
 
-      // const postObject = {
-      //   username: props.username,
-      //   title: props.title,
-      //   content: props.post,
-      //   category: props.category,
-      //   date: new Date().toISOString(),
-      //   likes: props.likes
-      // }
+      const postObject = {
+        title: props.title,
+        content: props.content,
+        category: props.category,
+        date: new Date().toISOString(),
+        likes: props.likes + likes
+      }
 
-      // axios
-      // .put(`http://localhost:3001/posts/update/${props.id}`, postObject)
-      // .then(response => response.data)
+      axios
+      .put(`http://localhost:3001/posts/update/${props.id}`, postObject)
+      .then(response => response.data)
+       setLikes(0);
     }
+           
+    const deletePost = (id) => {
+      axios
+      .delete(`http://localhost:3001/posts/${id}`)
+      .then(res => {
+        setPosts(posts.filter(p => p.id !== id));
+        console.log('Post are deleted!');
+      })
+      }
 
     const Post = (props) => {
       return(
@@ -46,7 +55,8 @@ const Posts = () => {
           <p> {props.post.date}</p>
           <h3> {props.post.title}</h3>
           <p> {props.post.content}</p>
-          <button onClick= {() => {handleClick()}}>{likes}</button>
+          <Link to={"/edit/"+props.post.id}>edit</Link> | <a href="#" onClick={() => {deletePost(props.post.id) }}>delete</a> <br />
+          <button onClick= {() => {handleClick(props.post)}}>{props.post.likes}</button>
           <hr />
           <br />
         </div>

@@ -19,7 +19,7 @@ const Navigationbar = () => {
         <NavDropdown.Item href="/posts">Stories</NavDropdown.Item>
         <NavDropdown.Divider />
         <NavDropdown.Item href="#action/3.3">Profile</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.4">Settings</NavDropdown.Item>
+        <NavDropdown.Item href="/message">Message</NavDropdown.Item>
         <NavDropdown.Item href="/logout">Sign out</NavDropdown.Item>
       </NavDropdown>
     </Nav>

@@ -64,12 +64,6 @@ const Login = () => {
     value={password}
     onChange={({ target }) => setPassword(target.value)}  />
   </Form.Group>
-  <Form.Group>
-    <Form.Check 
-    required
-    label="Agree to terms and conditions" 
-    />
-  </Form.Group>
   <Button variant="primary" type="submit">
     Submit
   </Button>

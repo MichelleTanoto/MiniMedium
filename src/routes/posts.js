@@ -91,7 +91,7 @@ postRouter.get('/', async (request, response) => {
       date: new Date(),
       likes: body.likes
     }
-  
+ 
     Post.findByIdAndUpdate(request.params.id, post, { new: true })
       .then(updatedPost => {
         response.json(updatedPost.toJSON())

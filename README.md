@@ -27,16 +27,20 @@ This project is built as a practical results of my understanding in React.
 - [x] Token
 - [x] Hash password.
 - [x] Stories based on what the author wrote
-- [x] like at posts.
-- [P] delete based on them.
-- [ ] Profile.
+- [x] delete based on them.
+
+### Priority
+- [P] like at posts.
 - [ ] Perfecting search components -- partial code already exist [logic still has flaws.]
+- [P] messaging
 - [ ] categorise post based on its tags (Home page).
 
 ### Future Plans
-- [ ] comments
+- [ ] Profile.
+- [ ] comments.
 - [ ] notifications.
-- [ ] messaging
-- [ ] enhance front end.
 - [ ] enhance register and login validator.
-- [ ] Test backend -- editpost, deletepost.
+
+
+### optional
+- [ ] enhance front end.

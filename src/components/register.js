@@ -88,6 +88,12 @@ const Register = () => {
     value={password}
     onChange={handlePasswordChange}  />
   </Form.Group>
+  <Form.Group>
+    <Form.Check 
+    required
+    label="Agree to terms and conditions" 
+    />
+  </Form.Group>
   <Button variant="primary" type="submit" disabled={!valid}>
     Submit
   </Button>

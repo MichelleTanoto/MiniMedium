@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const userRouter = require('express').Router();
 let User = require('../models/userModel');
+let chatkit = require('../models/chatKitModel')
 
 userRouter.route('/').get( async (req, res, next) => {
   const users = await User.find({}).populate('posts', {title: 1, content: 1, category: 1})
@@ -52,6 +53,17 @@ userRouter.post('/add', async (req, res, next) => {
     });
  
   const savedUser = await newUser.save()
+
+  const chatkitUser = await chatkit
+  .createUser({
+    id: req.body,
+    name: req.body
+  })
+
+  if(chatkitUser){
+    console.log('chatkit succesful.')
+  }
+  
 
   res.json('User added!')
 } catch(exception){

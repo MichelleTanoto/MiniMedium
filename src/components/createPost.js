@@ -33,6 +33,7 @@ const CreatePost = () => {
         .then(res => {
           console.log("New Post successfully added!"); 
           setNewPost('');
+          window.location = "/posts"
         })
         .catch((error) => console.log("shit"))
         // axios
