@@ -31,7 +31,10 @@ const EditPost = (props) => {
     }
     axios
     .put(`http://localhost:3001/posts/update/${props.match.params.id}`,postObject)
-    .then(res => console.log("Data updated!"));
+    .then(res => {
+      console.log("Data updated!");
+      window.location = "/posts";
+    });
 
      window.location = '/search';
   }

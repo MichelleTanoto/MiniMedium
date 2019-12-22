@@ -32,7 +32,6 @@ This project is built as a practical results of my understanding in React.
 ### Priority
 - [P] like at posts.
 - [ ] Perfecting search components -- partial code already exist [logic still has flaws.]
-- [P] messaging
 - [ ] categorise post based on its tags (Home page).
 
 ### Future Plans

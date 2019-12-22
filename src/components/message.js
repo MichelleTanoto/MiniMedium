@@ -1,6 +1,4 @@
 import React, {useState} from 'react';
-import 'skeleton-css/ccss/normalize.css';
-import 'skeleton-css/css/skeleton.css';
 import '../App.css';
 
 const Message = () => {

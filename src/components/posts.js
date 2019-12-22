@@ -2,10 +2,12 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
+import useCounter from '../hooks/counter';
 
 const Posts = () => {
     const [posts, setPosts] = useState([]);
     const [likes, setLikes] = useState(0);
+    const counter = useCounter();
 
     useEffect(() => {
     const user = window.localStorage.getItem('loggedInUser')
@@ -20,22 +22,21 @@ const Posts = () => {
     })
   }, [])
     
-    const handleClick = (props) =>
-    {
-       setLikes(likes + 1);
+    const handleClick = (props) => {
 
       const postObject = {
         title: props.title,
         content: props.content,
         category: props.category,
         date: new Date().toISOString(),
-        likes: props.likes + likes
+        likes: counter.value + 1
       }
 
       axios
       .put(`http://localhost:3001/posts/update/${props.id}`, postObject)
-      .then(response => response.data)
-       setLikes(0);
+      .then(response => {
+        setLikes(response.data.likes);
+      })
     }
            
     const deletePost = (id) => {
@@ -48,6 +49,7 @@ const Posts = () => {
       }
 
     const Post = (props) => {
+      console.log(props.post.likes)
       return(
         <Container>
         <div>
@@ -56,7 +58,7 @@ const Posts = () => {
           <h3> {props.post.title}</h3>
           <p> {props.post.content}</p>
           <Link to={"/edit/"+props.post.id}>edit</Link> | <a href="#" onClick={() => {deletePost(props.post.id) }}>delete</a> <br />
-          <button onClick= {() => {handleClick(props.post)}}>{props.post.likes}</button>
+          <button onClick= {counter.increase}>{counter.value}</button>
           <hr />
           <br />
         </div>

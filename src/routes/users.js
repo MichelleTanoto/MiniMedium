@@ -1,10 +1,9 @@
 const bcrypt = require('bcrypt');
 const userRouter = require('express').Router();
 let User = require('../models/userModel');
-let chatkit = require('../models/chatKitModel')
 
 userRouter.route('/').get( async (req, res, next) => {
-  const users = await User.find({}).populate('posts', {title: 1, content: 1, category: 1})
+  const users = await User.find({}).populate('posts', {title: 1, content: 1, category: 1, likes: 1})
   res.json(users);
     // .then(users => res.json(users)) 
     // // .then(users => res.json(users.map(user => user.toJSON())))
@@ -27,7 +26,7 @@ userRouter.route('/:id').get((req, res, next) => {
 
 userRouter.get('/:id/posts', async (request, response, next) =>{
   try{
-    const user = await User.findById(request.params.id).populate('posts', {title: 1, content: 1, category: 1})
+    const user = await User.findById(request.params.id).populate('posts', {title: 1, content: 1, category: 1, likes: 1})
     console.log(user);
     if(user){
       // response.json(JSON.stringify(user.posts));
@@ -54,30 +53,9 @@ userRouter.post('/add', async (req, res, next) => {
  
   const savedUser = await newUser.save()
 
-  // const chatkitUser = await chatkit
-  // .createUser({
-  //   id: req.body,
-  //   name: req.body
-  // })
-
-  // if(chatkitUser){
-  //   console.log('chatkit succesful.')
-  //   res.json('User added!')
-  // } 
 } catch(exception){
-  if(exception.error === 'services/chatkit/user_already_exists'){
-    console.log(`User already exists`)
-  } else {
   next(exception)
   }
-}
-});
-
-userRouter.post('/authenticate', (req, res) => {
-  const authData = chatkit.authenticate({
-    userId: req.query.user_id,
-  });
-  res.status(authData.status).send(authData.body);
 });
 
 userRouter.put('/update/:id', (request, response, next) => {
