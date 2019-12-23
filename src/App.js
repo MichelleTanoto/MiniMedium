@@ -9,7 +9,6 @@ import SearchPosts from './components/search';
 import Posts from './components/posts';
 import About from './components/about';
 import Logout from './components/logout';
-import Message from './components/message';
 
 const App = () => {
 
@@ -26,7 +25,6 @@ const App = () => {
         <Route path="/home" component={Home} />
         <Route path="/posts" component={Posts} />
         <Route path="/about" component={About} />
-        <Route path="/message" component={Message} /> 
         </>
      </Router>
   )

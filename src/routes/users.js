@@ -3,7 +3,7 @@ const userRouter = require('express').Router();
 let User = require('../models/userModel');
 
 userRouter.route('/').get( async (req, res, next) => {
-  const users = await User.find({}).populate('posts', {title: 1, content: 1, category: 1, likes: 1})
+  const users = await User.find({}).populate('posts', {title: 1, content: 1, category: 1})
   res.json(users);
     // .then(users => res.json(users)) 
     // // .then(users => res.json(users.map(user => user.toJSON())))
@@ -26,7 +26,7 @@ userRouter.route('/:id').get((req, res, next) => {
 
 userRouter.get('/:id/posts', async (request, response, next) =>{
   try{
-    const user = await User.findById(request.params.id).populate('posts', {title: 1, content: 1, category: 1, likes: 1})
+    const user = await User.findById(request.params.id).populate('posts', {title: 1, content: 1, category: 1})
     console.log(user);
     if(user){
       // response.json(JSON.stringify(user.posts));

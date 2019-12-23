@@ -1,22 +1,15 @@
 const mongoose = require('mongoose')
 
-const postSchema = new mongoose.Schema({
-  title: {
-    type: String, 
-    required: true
+const commentSchema = new mongoose.Schema({
+  date: Date,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   },
   content: {
     type: String,
     required: true,
     minlength: 1
-  },
-  category: {
-    type: String,
-  },
-  date: Date,
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
   },
   comments: [
     {
@@ -26,7 +19,7 @@ const postSchema = new mongoose.Schema({
   ]
 })
 
-postSchema.set('toJSON', {
+commentSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
@@ -34,4 +27,4 @@ postSchema.set('toJSON', {
   }
 })
 
-module.exports = mongoose.model('Post', postSchema)
+module.exports = mongoose.model('Comment', commentSchema)

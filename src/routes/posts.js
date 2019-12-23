@@ -89,7 +89,6 @@ postRouter.get('/', async (request, response) => {
       content: body.content,
       category: body.category,
       date: new Date(),
-      likes: body.likes
     }
  
     Post.findByIdAndUpdate(request.params.id, post, { new: true })

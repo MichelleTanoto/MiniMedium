@@ -30,16 +30,13 @@ This project is built as a practical results of my understanding in React.
 - [x] delete based on them.
 
 ### Priority
-- [P] like at posts.
 - [ ] Perfecting search components -- partial code already exist [logic still has flaws.]
+- [P] comments.
 - [ ] categorise post based on its tags (Home page).
 
 ### Future Plans
-- [ ] Profile.
-- [ ] comments.
 - [ ] notifications.
 - [ ] enhance register and login validator.
-
 
 ### optional
 - [ ] enhance front end.
